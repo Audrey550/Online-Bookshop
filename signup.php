@@ -1,4 +1,21 @@
-<!DOCTYPE html>
+<?php
+    if(!empty($_POST)){
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $options = [
+                'cost' => 15,
+            ];
+        $password = password_hash($password, PASSWORD_DEFAULT, $options);
+        
+        $conn = new PDO('mysql:host=localhost;dbname=bookshop', 'root', '');
+        $statement = $conn->prepare('INSERT INTO clients (email, password) VALUES (:email, :password)');
+        $statement->bindValue(':email', $email); //safe for sql injection
+        $statement->bindValue(':password', $password);
+        $statement->execute();
+    }
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

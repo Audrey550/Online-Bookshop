@@ -1,4 +1,44 @@
-<!DOCTYPE html>
+<?php
+    function canLogin($p_email, $p_password){
+        $conn = new PDO('mysql:host=localhost;dbname=bookshop', 'root', '');
+        $statement = $conn->prepare('SELECT * FROM clients WHERE email = :email');
+        $statement->bindValue(':email', $p_email);
+        $statement->execute();
+
+        $client = $statement->fetch(PDO::FETCH_ASSOC);
+        if($client){
+            $hash = $client['password'];
+            if(password_verify($p_password, $hash)){
+                return true;
+            }
+
+        }else{
+            //not found
+            return false;
+        }
+    }
+
+    //Wanneer loggen we in? 
+    if(!empty($_POST)){ 
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+
+        if(canLogin($email, $password)){
+            
+            //Ok
+            session_start();
+			$_SESSION['loggedin'] = true;
+			$_SESSION['email'] = $email;
+
+            header("Location: index.php");
+
+        }else{
+            //Niet Ok
+            $error = true;
+        }
+    }
+
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

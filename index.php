@@ -19,6 +19,11 @@
         //PDO Connection
         $conn = new PDO('mysql:dbname=bookshop;host=localhost', "root", "");
 
+        session_start(); //Zo weet de server wie jij bent
+            if($_SESSION['loggedin']!== true){
+            header('Location: login.php');
+        }
+
         //SELECT * from products and fetch as array:
         $statement = $conn->prepare('SELECT * FROM products');
         $statement->execute();
@@ -34,6 +39,9 @@
 </head>
 <body>
     <h1>Online Bookshop</h1>
+    
+    <a href="logout.php" class="navbar__logout">Hi <?php echo htmlspecialchars($_SESSION['email']); ?>, logout?</a>
+
     <?php foreach($products as $product): ?>
     <article>
         <h2><?php echo $product['title']?>: €<?php echo $product['price']?></h2>
