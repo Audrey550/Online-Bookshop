@@ -1,21 +1,26 @@
 <?php
-    if(!empty($_POST)){
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+    include_once(__DIR__ . "/classes/Client.php");
 
-        $options = [
-                'cost' => 15,
-            ];
-        $password = password_hash($password, PASSWORD_DEFAULT, $options);
-        
-        $conn = new PDO('mysql:host=localhost;dbname=bookshop', 'root', '');
-        $statement = $conn->prepare('INSERT INTO clients (email, password) VALUES (:email, :password)');
-        $statement->bindValue(':email', $email); //safe for sql injection
-        $statement->bindValue(':password', $password);
-        $statement->execute();
+    if(!empty($_POST)){
+
+        try{
+            $client = new Client();
+            $client->setUsername($_POST['username']);
+            $client->setEmail($_POST['email']);
+            $client->setPassword($_POST['password']);
+
+            $client->save();
+            $succes = "User saved!";
+
+        }catch (Exception $e) {
+            $error = "Error: " .$e->getMessage();
+        }
+
     }
 
-?><!DOCTYPE html>
+    $clients = Client::getAll();
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -24,28 +29,28 @@
     <link rel="stylesheet" type="text/css" href="css/signup.css?<?php echo time(); ?>"/>
 </head>
 <body>
+    <?php if(isset($error)): ?>
+    <div class="error" style="color: red;"><?php echo $error; ?></div>
+    <?php endif; ?>
+
+    <?php if(isset($succes)): ?>
+    <div class="succes"><?php echo $succes; ?></div>
+    <?php endif; ?>
+
 <div class="bookShopSignup">
         <div class="formSignup">
             <form action="" method="post">
                 <h2 class="formTitle">Welcome to BookShop! <br> Create an account here
                 </h2>
 
-                <?php if(isset($error) ): ?>
-                <div class="form-Error">
-                    <p>
-                        Incorrect email and password. Please try again. 
-                    </p>
-                </div>
-                <?php endif; ?>
-
                 <div class="theForm">
 					<label for="Name">Username</label>
-					<input type="text" name="name">
+					<input type="text" name="username" id="Username">
 				</div>
 
                 <div class="theForm">
 					<label for="Email">Email</label>
-					<input type="text" name="email">
+					<input type="text" name="email" id="email">
 				</div>
 				<div class="theForm">
 					<label for="Password">Password</label>

@@ -21,7 +21,7 @@
 
         session_start(); //Zo weet de server wie jij bent
             if($_SESSION['loggedin']!== true){
-            header('Location: login.php');
+            header('Location: signup.php'); //login.php verandert naar signup.php
         }
 
         //SELECT * from products and fetch as array:
@@ -39,8 +39,8 @@
 </head>
 <body>
     <h1>Online Bookshop</h1>
-    
-    <a href="logout.php" class="navbar__logout">Hi <?php echo htmlspecialchars($_SESSION['email']); ?>, logout?</a>
+
+    <a href="logout.php" class="navbar__logout">Hi <?php echo htmlspecialchars($_SESSION['email']); ?>, logout?</a> 
 
     <?php foreach($products as $product): ?>
     <article>
