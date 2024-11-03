@@ -9,68 +9,6 @@ body{
     margin: 0;
 }
 
-/*Navigatie Balk*/
-.navbar{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 0.5em;
-}
-
-.navbar a{
-    color: #292b35;
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none;
-    display: inline-block;
-    margin-left: 20px;
-    transition: 0.5s;
-}
-
-.navbar a:hover{ /*Why is the css not css'ing xC !!!*/
-    color:aquamarine; 
-    transition: 250ms ease-in-out;
-    transform: scale(1.1);
-}
-
-.navbar input{
-    width: 100%;
-    max-width: 200px;
-    margin-right: 20px;
-    margin-top: 5px;
-    background-color: #d5a55a;
-    color: white;
-    padding: 0.5em;
-    border: 2px solid white;
-    border-radius: 8px;
-}
-
-.navbar form{ /*the search bar*/
-    flex: 1 1 30%;
-    align-self: flex-end;
-    text-align: right;
-}
-
-::placeholder{
-    color: white;
-}
-
-/*Signup pagina*/
-.formSignup{
-    height: 550px;
-    width: 650px;
-    background-color: #d5a55a;
-    border: 5px solid white;
-    margin: auto;
-    margin-top: 30px;
-    border-radius: 20px;
-}
-
-.formSignup h3{
-    color: red;
-}
-
 /*Login pagina*/
 .formTitle{
     color: rgb(42, 36, 84);
