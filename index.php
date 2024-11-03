@@ -1,33 +1,24 @@
 <?php 
-    /* Om te checken of je databank is geconnecteerd: 
-    $conn = $mysqli = new mysqli('localhost', 'root', '', 'bookshop'); 
-        if($conn->connect_error){
-            echo "ERROR";
-        }else{
-            echo "Connected";
-        }*/
+    //PDO Connection
+    include_once(__DIR__ . "/classes/Db.php");
+    include_once(__DIR__ . "/classes/Client.php");
 
-        /* Manier om aan je databank te geraken: 
-        $conn = $mysqli = new mysqli('localhost', 'root', '', 'bookshop'); 
-        //select * from products and loop
 
-        $sql = "SELECT * FROM products";
-        $result = $conn->query($sql);
-        $products = $result->fetch_all(MYSQLI_ASSOC);
-        //var_dump($products);*/
+    session_start(); //Zo weet de server wie jij bent
+        if($_SESSION['loggedin']!== true){
+        header('Location: signup.php'); //login.php verandert naar signup.php
+    }
 
-        //PDO Connection
-        $conn = new PDO('mysql:dbname=bookshop;host=localhost', "root", "");
+    $conn = Db::getConnection();
 
-        session_start(); //Zo weet de server wie jij bent
-            if($_SESSION['loggedin']!== true){
-            header('Location: signup.php'); //login.php verandert naar signup.php
-        }
+    $sql = "SELECT * FROM products";
 
-        //SELECT * from products and fetch as array:
-        $statement = $conn->prepare('SELECT * FROM products');
-        $statement->execute();
-        $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+    //var_dump($products);
+
+    //SELECT * from products and fetch as array:
+    $statement = $conn->prepare('SELECT * FROM products');
+    $statement->execute();
+    $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 
 ?><!DOCTYPE html>
@@ -36,12 +27,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Audrey's Bookstore</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css?<?php echo time(); ?>"/>
 </head>
 <body>
-    <h1>Online Bookshop</h1>
+    <?php include_once("nav.inc.php"); ?>
+    <img class="headerimg" src="img/headerVisual.png">
 
-    <a href="logout.php" class="navbar__logout">Hi <?php echo htmlspecialchars($_SESSION['email']); ?>, logout?</a> 
+    <div class="categoryIcons">
+        <img src="img/categories.png">
+    </div>
 
+    <div class="topPicks">
+        <h2>Bekijk onze topkeuzes</h2>
+    </div>
+    
     <?php foreach($products as $product): ?>
     <article>
         <h2><?php echo $product['title']?>: €<?php echo $product['price']?></h2>

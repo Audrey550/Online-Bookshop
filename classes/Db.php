@@ -5,7 +5,7 @@
 
         public static function getConnection(){
             if(self::$conn === null){
-                echo "👾";
+                //echo "👾";
                 return self::$conn = new PDO('mysql:host=localhost;dbname=bookshop', 'root', '');
             }else{
                 echo "😎";

@@ -1,5 +1,4 @@
 <?php 
-
     include_once(__DIR__."/Db.php");
     class Client{
         private $username;
@@ -70,7 +69,7 @@
                 if(empty($password)){
                     throw new Exception("Password cannot be empty 😫");
                 }
-                $this->password = $password;
+                $this->password = password_hash($password, PASSWORD_DEFAULT);
 
                 return $this;
         }
@@ -87,7 +86,7 @@
             $statement->bindParam(":email", $this->email);
             $statement->bindParam(":password", $this->password);
             return $statement->execute(); 
-                 
+         
         }
 
         public static function getAll(){

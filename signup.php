@@ -1,21 +1,24 @@
 <?php
+    include_once(__DIR__ . "/classes/Db.php");
     include_once(__DIR__ . "/classes/Client.php");
 
     if(!empty($_POST)){
-
         try{
+            //Maakt een nieuw Client object aan
             $client = new Client();
             $client->setUsername($_POST['username']);
             $client->setEmail($_POST['email']);
             $client->setPassword($_POST['password']);
 
-            $client->save();
+            $client->save();//Slaagt de gebruiker op
             $succes = "User saved!";
 
-        }catch (Exception $e) {
-            $error = "Error: " .$e->getMessage();
-        }
+            //Redirect naar de loginpagina nadat de login gelukt is
+            header("Location: login.php");
 
+        }catch (Exception $e) {
+            $error = "Error: " .$e->getMessage();//Haal de foutmelding op 
+        }
     }
 
     $clients = Client::getAll();

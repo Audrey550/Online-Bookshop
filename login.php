@@ -1,43 +1,36 @@
-<?php
-    function canLogin($p_email, $p_password){
-        $conn = new PDO('mysql:host=localhost;dbname=bookshop', 'root', '');
-        $statement = $conn->prepare('SELECT * FROM clients WHERE email = :email');
-        $statement->bindValue(':email', $p_email);
-        $statement->execute();
+<?php    
+    include_once(__DIR__ . "/classes/Db.php");
+    include_once(__DIR__ . "/classes/Client.php");
 
-        $client = $statement->fetch(PDO::FETCH_ASSOC);
-        if($client){
-            $hash = $client['password'];
-            if(password_verify($p_password, $hash)){
-                return true;
-            }
+    session_start();
 
-        }else{
-            //not found
-            return false;
-        }
-    }
+    if(!empty($_POST)){
 
-    //Wanneer loggen we in? 
-    if(!empty($_POST)){ 
-		$email = $_POST['email'];
-		$password = $_POST['password'];
+        try{
+        $email = $_POST['email'];
+        $password = $_POST['password'];
 
-        if(canLogin($email, $password)){
-            
-            //Ok
-            session_start();
-			$_SESSION['loggedin'] = true;
-			$_SESSION['email'] = $email;
+        $clients = Client::getAll(); //kan oneindig inloggen, zelfs als staan de gegevens niet in de databank
+
+        $client = new Client();
+        $client->setEmail($_POST['email']);
+        $client->setPassword($_POST['password']);
+        
+        if($client && password_verify($password, $client->getPassword())){
+            $_SESSION['loggedin'] = true;
+            $_SESSION['username'] = $client->getUsername();
 
             header("Location: index.php");
+            exit;
 
         }else{
-            //Niet Ok
-            $error = true;
+            $error = "ongeldige login gegevens";
         }
-    }
 
+        }catch (Exception $e) {
+            $error = "Error: " .$e->getMessage();
+        }
+}
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
