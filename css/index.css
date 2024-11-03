@@ -87,10 +87,27 @@ nav input{
 .topPicks{
     background-color: #8e3f3f;
     width: 100%;
-    height: 80px;
+    height: 400px;
 }
 
 .topPicks h2{
+    display: flex;
     color: white;
     font-weight: lighter;
+    margin-left: 50px;
+}
+
+/*topdeals div*/
+.topDeals h2{
+    display: flex;
+    font-weight: lighter;
+    margin-left: 50px;
+}
+
+.topDeals img{ /*make picture not blurry*/
+    display: flex;
+    width: 60%;
+    height: 60%;
+    margin-left: auto;
+    margin-right: auto;
 }

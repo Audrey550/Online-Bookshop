@@ -41,6 +41,11 @@
         <h2>Bekijk onze topkeuzes</h2>
     </div>
     
+    <div class="topDeals">
+        <h2>Bekijk onze topdeals</h2>
+        <img src="img/booksalesIcon.png">
+    </div>
+
     <?php foreach($products as $product): ?>
     <article>
         <h2><?php echo $product['title']?>: €<?php echo $product['price']?></h2>
