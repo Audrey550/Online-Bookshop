@@ -1,0 +1,96 @@
+*
+{
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #e4c595;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+/*Navigatie Balk*/
+nav{
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+nav a{
+    color: #292b35;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 20px;
+    transition: 0.5s;
+}
+
+nav a:hover{ 
+    color:aquamarine; 
+    transition: 250ms ease-in-out;
+    transform: scale(1.1);
+}
+
+/*the search bar*/
+nav input{
+    padding: 0.5em;
+    background-color: #d5a55a;
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+
+    margin-top: -10px; /*find another way to align this better*/
+    margin-left: 20px;
+}
+
+::placeholder{ 
+    color: white;
+}
+
+.nav__logout{
+    display: flex;
+}
+
+.nav__logout img{ /*align this better !!*/
+    width: 50px;
+    height: 50px;
+}
+
+.nav__shoppingCart img{ /*align this better !!*/
+    width: 50px;
+    height: 50px;
+
+    margin-left: -20px;
+
+}
+
+/*header visual*/
+.headerimg{
+    display: flex;
+    width: 60%;
+    height: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*categorie icons*/
+.categoryIcons img{
+    display: flex;
+    width: 40%;
+    height: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*topkeuzes div*/
+.topPicks{
+    background-color: #8e3f3f;
+    width: 100%;
+    height: 80px;
+}
+
+.topPicks h2{
+    color: white;
+    font-weight: lighter;
+}
