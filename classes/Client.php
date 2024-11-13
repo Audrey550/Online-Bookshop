@@ -114,6 +114,7 @@
                         $client->username = $result['username'];
                         $client->email = $result['email'];
                         $client->password = $result['password']; //Haalt direct het gehashte wachtwoord op
+                        $client->usertype = $result['usertype']; 
                         return $client;
                 }else{
                         return null; //heeft geen gebruiker gevonden

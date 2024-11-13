@@ -62,9 +62,9 @@
 					<input type="password" name="password">
 				</div>
 
-                <div class="theForm"><label for="is_admin">Admin:</label>
+                <!--<div class="theForm"><label for="is_admin">Admin:</label>
                 <input type="checkbox" name="is_admin" value="1"><br>
-                </div>
+                </div>-->
                
                 <div class="theForm">
 					<input type="submit" value="Get Started" class="btn">
