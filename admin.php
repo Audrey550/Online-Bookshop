@@ -9,7 +9,7 @@
     $statement = $conn->query("SELECT * FROM genres");
     $genres = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true){
+    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true){ //zet in commentaar als je de admin page wil zien
         //gebruiker is niet ingelogd, redirect naar login.php
         header("Location: login.php");
         exit;
@@ -20,7 +20,9 @@
         exit;
     } 
     
-    echo "<h1>Welkom, Admin!</h1>"; 
+    echo "<h1>Welkom, Admin!</h1>";
+
+    
 
 ?><!DOCTYPE html>
 <html lang="en">

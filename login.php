@@ -17,6 +17,9 @@
             $_SESSION['username'] = $client->getUsername();
             $_SESSION['usertype'] = $client->getUsertype(); //slaagt een ysertype op in de sessie 
 
+            //Debugging
+            //var_dump($_SESSION['usertype']);
+
             if($_SESSION['usertype'] == 1){
                 header("Location: admin.php");
             }else{

@@ -68,7 +68,9 @@
     <?php foreach($products as $product): ?>
     <article style="max-width: 500px; display:inline-block;">
         <h2 style="color: #292b35; "><?php echo $product['product_name']?></h2>
+
         <img src="<?php echo"./".htmlspecialchars($product['product_img']);?>"style="max-width: 150px;">
+        
         <h4 style="color:#292b35; font-weight:lighter;"><?php echo $product['product_description']?></h4>
         <h3>€<?php echo $product['product_price']?></h3>
 
