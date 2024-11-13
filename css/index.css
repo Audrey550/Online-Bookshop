@@ -81,6 +81,7 @@ nav input{
     height: 40%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 20px;
 }
 
 /*topkeuzes div*/
@@ -88,26 +89,69 @@ nav input{
     background-color: #8e3f3f;
     width: 100%;
     height: 400px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
 }
 
 .topPicks h2{
     display: flex;
+    position: relative;
+    top: 10px;
     color: white;
     font-weight: lighter;
     margin-left: 50px;
 }
 
-/*topdeals div*/
+    /*Eventueel nog aanpassen mocht de mockup manier niet toegestaan zijn*/
+.topOne{
+    background: url(../img/getalifechloebrown.jpg);
+    width: 150px;
+    height: 210px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: 100px;
+    margin-left: -250px;
+}
+
+.topOne h1{
+    background-color: gold;
+    text-align: center;
+    padding: 5px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-left: -60px;
+    margin-top: -10px;
+}
+
+.topOne h3{
+    margin-left: -10px;
+    margin-top: 200px;
+    width: 500px;
+}
+
+/*topdeals div - MSS VERWIJDEREN, MSS HOUDEN IDK
+
+.topDeals{
+    overflow: hidden;
+    margin-top: 10px;
+}
+
 .topDeals h2{
+    position: relative;
+    top: 10px;
     display: flex;
     font-weight: lighter;
     margin-left: 50px;
+    
 }
 
-.topDeals img{ /*make picture not blurry*/
+.topDeals img{ /*make picture not blurry
     display: flex;
     width: 60%;
     height: 60%;
     margin-left: auto;
     margin-right: auto;
-}
+}*/

@@ -11,7 +11,7 @@ body{
 
 /*Signup pagina*/
 .formSignup{
-    height: 550px;
+    height: 600px;
     width: 650px;
     background-color: #d5a55a;
     border: 5px solid white;
@@ -61,6 +61,20 @@ body{
     margin: 0 auto;
 }
 
+.theForm input[type= "checkbox"]{
+    margin-left: 70px;
+    vertical-align: middle;
+    transform: scale(1.2);
+}
+
+.theForm input[type= "checkbox"]:hover{
+    cursor: pointer;
+}
+
+.theForm input[type= "checkbox"]:checked{
+    background-color: aquamarine;
+}
+
 h3{
     color: rgb(42, 36, 84);
     font-weight: lighter;
@@ -88,7 +102,7 @@ h3 a:hover{
 .btn
 {
     width: 100%;
-    margin-top: 20px;
+    margin-top: -20px;
     background-color: rgb(42, 36, 84);
     color: aquamarine;
     border: 4px solid white;
