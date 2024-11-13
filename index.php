@@ -13,13 +13,14 @@
 
     $sql = "SELECT * FROM products";
 
-    //var_dump($products);
+    //SELECT * from genres, om de producten per genre te laten filteren
+    $statement = $conn->query("SELECT * FROM genres");
+    $genres = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     //SELECT * from products and fetch as array:
     $statement = $conn->prepare('SELECT * FROM products');
     $statement->execute();
     $products = $statement->fetchAll(PDO::FETCH_ASSOC);
-
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -33,22 +34,44 @@
     <?php include_once("nav.inc.php"); ?>
     <img class="headerimg" src="img/headerVisual.png">
 
-    <div class="categoryIcons">
+    <div class="categoryIcons"> <!--Change img to individual icons for each category-->
         <img src="img/categories.png">
     </div>
 
-    <div class="topPicks">
-        <h2>Bekijk onze topkeuzes</h2>
+    <div class="topPicks"> <!--A mockup of the top 3 listing of the most bought items that week-->
+        <h2>Onze bestsellers van deze week</h2>
+            <div class="topOne">
+                <h1>1</h1>
+                <h3>Get A Life, Chloe Brown <br> Talia Hibbert</h3>
+            </div>
     </div>
     
-    <div class="topDeals">
-        <h2>Bekijk onze topdeals</h2>
-        <img src="img/booksalesIcon.png">
-    </div>
+    <!--Dropdown menu om de producten per genre te kunnen filteren-->
+    <h2>Bekijk onze boeken</h2>
 
+    <!--De style plaats je als laatste in de tag, bv; form method="" action="post" style=" "-->
+    <form method="" action="post">
+        <label for="genre" style="">Filter op genre:</label>
+        <select name="genre" id="genre" style="color #292b35; background-color: white; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+            <option value="">Alle genres</option>
+            <?php foreach($genres as $genre):?>
+            <option value="<?php echo $genre['id']; ?>">
+                <?php echo htmlspecialchars($genre['genre_name']); ?>
+            </option>
+            <?php endforeach; ?>
+        </select>
+        <button type="submit" style= "background-color: #2a2454; color: white; padding: 6px 10px; border: none; border-radius: 5px; cursor: pointer;">Zoek</button>
+    </form>
+
+
+   <!--De producten op de pagina displayen--> 
     <?php foreach($products as $product): ?>
-    <article>
-        <h2><?php echo $product['title']?>: €<?php echo $product['price']?></h2>
+    <article style="max-width: 500px; display:inline-block;">
+        <h2 style="color: #292b35; "><?php echo $product['product_name']?></h2>
+        <img src="<?php echo"./".htmlspecialchars($product['product_img']);?>"style="max-width: 150px;">
+        <h4 style="color:#292b35; font-weight:lighter;"><?php echo $product['product_description']?></h4>
+        <h3>€<?php echo $product['product_price']?></h3>
+
     </article>
     <?php endforeach; ?>
 </body>

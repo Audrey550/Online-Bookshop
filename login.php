@@ -5,22 +5,23 @@
     session_start();
 
     if(!empty($_POST)){
-
         try{
         $email = $_POST['email'];
         $password = $_POST['password'];
 
-        $clients = Client::getAll(); //kan oneindig inloggen, zelfs als staan de gegevens niet in de databank
+        $client = Client::getByEmail($email); // Haalt de gebruiker op via het email adres
 
-        $client = new Client();
-        $client->setEmail($_POST['email']);
-        $client->setPassword($_POST['password']);
         
         if($client && password_verify($password, $client->getPassword())){
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $client->getUsername();
+            $_SESSION['usertype'] = $client->getUsertype(); //slaagt een ysertype op in de sessie 
 
-            header("Location: index.php");
+            if($_SESSION['usertype'] == 1){
+                header("Location: admin.php");
+            }else{
+                header("Location: index.php");
+            }
             exit;
 
         }else{
@@ -74,3 +75,6 @@
     </div>
 </body>
 </html>
+
+
+<!--Aanpassen: add usertype, admin stuff-->

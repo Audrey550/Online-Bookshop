@@ -10,6 +10,8 @@
             $client->setEmail($_POST['email']);
             $client->setPassword($_POST['password']);
 
+            $usertype = isset($_POST['is admin']) ? 1 : 0;
+            $client->setUsertype($usertype);
             $client->save();//Slaagt de gebruiker op
             $succes = "User saved!";
 
@@ -60,6 +62,10 @@
 					<input type="password" name="password">
 				</div>
 
+                <div class="theForm"><label for="is_admin">Admin:</label>
+                <input type="checkbox" name="is_admin"><br>
+                </div>
+               
                 <div class="theForm">
 					<input type="submit" value="Get Started" class="btn">
 				</div>
