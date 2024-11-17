@@ -87,9 +87,9 @@
 
         public function save(){
             //conn
-            $conn = Db::getConnection();
             //$conn = new PDO('mysql:host=localhost;dbname=bookshop', 'root', '');
-
+            $conn = Db::getConnection();
+            
             //insert query
             $statement = $conn->prepare("INSERT INTO clients (username, email, password, usertype) VALUES (:username, :email, :password, :usertype)"); 
 

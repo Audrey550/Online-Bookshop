@@ -19,10 +19,6 @@
         header("Location: index.php");
         exit;
     } 
-    
-    echo "<h1>Welkom, Admin!</h1>";
-
-    
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -40,7 +36,7 @@
         <label for="product_name">Productnaam:</label>
         <input type="text" name="product_name" id="product_name" required> <br><br>
 
-        <label for="product_description">Productnaam:</label>
+        <label for="product_description">Product beschrijving:</label>
         <textarea name="product_description" id="product_description" required></textarea><br><br>
 
         <label for="product_price">Prijs (€):</label>
@@ -61,6 +57,10 @@
 
         <button type="submit">Voeg product toe</button>
     </form>
+
+     <!--Producten kunnen verwijderen (als admin!)-->
+    
+
 
 </body>
 </html>

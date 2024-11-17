@@ -11,7 +11,7 @@
     <!--INfo specifiek voor admins-->
     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
         <?php if($_SESSION['usertype'] == 1): ?>
-            <a href="admin.php">Admin Page</a>
+            <a href="admin.php">Admin pagina</a>
         <?php endif ?>
     <?php endif ?>
 
