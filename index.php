@@ -17,8 +17,15 @@
     $statement = $conn->query("SELECT * FROM genres");
     $genres = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+    if(isset($_POST['genre']) && !empty($_POST['genre'])){
+        $genre_id = $_POST['genre'];
+        $statement = $conn->prepare('SELECT * FROM products WHERE genre_id = :genre_id');
+        $statement->bindParam(':genre_id', $genre_id);
+    }else{
+        $statement = $conn->prepare('SELECT * FROM products');
+    }
+
     //SELECT * from products and fetch as array:
-    $statement = $conn->prepare('SELECT * FROM products');
     $statement->execute();
     $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -50,7 +57,7 @@
     <h2>Bekijk onze boeken</h2>
 
     <!--De style plaats je als laatste in de tag, bv; form method="" action="post" style=" "-->
-    <form method="" action="post">
+    <form method="POST" action="">
         <label for="genre" style="">Filter op genre:</label>
         <select name="genre" id="genre" style="color #292b35; background-color: white; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
             <option value="">Alle genres</option>
@@ -73,6 +80,12 @@
         
         <h4 style="color:#292b35; font-weight:lighter;"><?php echo $product['product_description']?></h4>
         <h3>€<?php echo $product['product_price']?></h3>
+
+        <!--Producten kunnen verwijderen (als admin!)-->
+        <form method="POST" action="adminDeleteProduct">
+            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+            <button type="submit">Verwijder dit product</button>
+        </form>
 
     </article>
     <?php endforeach; ?>
