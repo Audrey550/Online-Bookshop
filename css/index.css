@@ -50,19 +50,19 @@ nav input{
 
 .nav__logout{
     display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: auto;
 }
 
-.nav__logout img{ /*align this better !!*/
-    width: 50px;
-    height: 50px;
+.nav__logout a{
+    display: flex;
 }
 
-.nav__shoppingCart img{ /*align this better !!*/
+.nav__logout img{
+    display: block; /*zorgt ervoor dat de afbeeldingen consistent zijn in gedrag*/
     width: 50px;
     height: 50px;
-
-    margin-left: -20px;
-
 }
 
 /*header visual*/
