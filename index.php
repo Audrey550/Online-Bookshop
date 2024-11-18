@@ -54,12 +54,10 @@
     </div>
     
     <!--Dropdown menu om de producten per genre te kunnen filteren-->
-    <h2>Bekijk onze boeken</h2>
-
-    <!--De style plaats je als laatste in de tag, bv; form method="" action="post" style=" "-->
+    <h2 class="genre-h2">Bekijk onze boeken</h2>
     <form method="POST" action="">
-        <label for="genre" style="">Filter op genre:</label>
-        <select name="genre" id="genre" style="color #292b35; background-color: white; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+        <label for="genre" class="genre-title">Filter op genre:</label>
+        <select name="genre" id="genre" class="genre-select">
             <option value="">Alle genres</option>
             <?php foreach($genres as $genre):?>
             <option value="<?php echo $genre['id']; ?>">
@@ -67,33 +65,36 @@
             </option>
             <?php endforeach; ?>
         </select>
-        <button type="submit" style= "background-color: #2a2454; color: white; padding: 6px 10px; border: none; border-radius: 5px; cursor: pointer;">Zoek</button>
+        <button type="submit" class="search-Btn">Zoek</button>
     </form>
 
-
    <!--De producten op de pagina displayen--> 
+   <div class="product-container">
     <?php foreach($products as $product): ?>
-    <article style="max-width: 500px; display:inline-block;">
-        <h2 style="color: #292b35; "><?php echo $product['product_name']?></h2>
+    <article class="product">
+        <h2 class="product-name"><?php echo $product['product_name']?></h2>
 
-        <img src="<?php echo"./".htmlspecialchars($product['product_img']);?>"style="max-width: 150px;">
+        <!--<a href="productDetails.php">De img code van lijn 78</a>-->
+        <img src="<?php echo"./".htmlspecialchars($product['product_img']);?>" class="product-img">
         
-        <h4 style="color:#292b35; font-weight:lighter;"><?php echo $product['product_description']?></h4>
+        <h4 class="product-description"><?php echo $product['product_description']?></h4>
         <h3>€<?php echo $product['product_price']?></h3>
+
+        <!--Producten kunnen bewerken (als admin)-->
+        <?php if($_SESSION['usertype'] == 1): ?>
+        <form method="GET" action="adminEditProduct.php">
+            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+            <button type="submit" class="edit-Btn">Bewerk het product</button>
+        </form>
 
         <!--Producten kunnen verwijderen (als admin!)-->
         <form method="POST" action="adminDeleteProduct.php">
             <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-            <button type="submit">Verwijder dit product</button>
+            <button type="submit" class="delete-Btn">Verwijder dit product</button>
         </form>
-
-        <!--Producten kunnen bewerken (als admin)-->
-        <form method="GET" action="adminEditProduct.php">
-            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
-            <button type="submit">Bewerk het product</button>
-        </form>
-
+        <?php endif ?>
     </article>
     <?php endforeach; ?>
+    </div>
 </body>
 </html>

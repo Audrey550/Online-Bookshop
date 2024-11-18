@@ -104,7 +104,6 @@ nav input{
     margin-left: 50px;
 }
 
-    /*Eventueel nog aanpassen mocht de mockup manier niet toegestaan zijn*/
 .topOne{
     background: url(../img/getalifechloebrown.jpg);
     width: 150px;
@@ -132,26 +131,117 @@ nav input{
     width: 500px;
 }
 
-/*topdeals div - MSS VERWIJDEREN, MSS HOUDEN IDK
 
-.topDeals{
-    overflow: hidden;
+/*Items*/
+.genre-h2{
+    font-weight: lighter;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+/*Het genre dropdown menu*/
+.genre-title{
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.genre-select{
+    color: #292b35;
+    background-color: white;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/*De zoekknop*/
+.search-Btn{
+    color: white;
+    background-color: #2a2454;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-Btn:hover{
+    background-color: aquamarine;
+    color: #2a2454;
+}
+
+.product-container{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin: 20px;
+    align-items: stretch; /*Zorgt dat alle afbeeldingen dezelfde hoogte hebben*/
+}
+
+.product{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+    background-color: #8e3f3f;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+/*De naam van het product (titel van het boek)*/
+.product-name{
+    color: white;
+    font-size: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/*De afbeelding van het product*/
+.product-img{
+    width: 100%;
+    height: auto;
+    max-width: 150px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    object-fit: contain; /*behoud de aspect ratio van de afbeelding*/
+}
+
+/*De beschrijving van het product*/
+.product-description{
+    display: inline-block;
+    color: #f4e6d4;
+    font-size: 15px;
+    font-weight: lighter;
+    text-align: justify;
+    align-items: center;
+    justify-content: center;
+    word-spacing: -1px; /*vekrleint direct de ruimte tussen woorden*/
+    hyphens: auto; /*Zorgt dat woorden automatisch worden afgebroken*/
+    margin: 10px 0;
+    min-height: 150px;
+}
+
+/*De prijs van het product*/
+.product h3{ 
+    font-size: 20px;
     margin-top: 10px;
 }
 
-.topDeals h2{
-    position: relative;
-    top: 10px;
-    display: flex;
-    font-weight: lighter;
-    margin-left: 50px;
-    
+/*Knoppen om producten te verwijderen en aan te passen*/
+.edit-Btn, .delete-Btn{
+    background-color: #2a2454;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-.topDeals img{ /*make picture not blurry
-    display: flex;
-    width: 60%;
-    height: 60%;
-    margin-left: auto;
-    margin-right: auto;
-}*/
+.delete-Btn{
+    margin-top: 10px;
+}
+
+.edit-Btn:hover, .delete-Btn:hover{
+    background-color: aquamarine;
+    color: #2a2454;
+}
