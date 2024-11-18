@@ -9,7 +9,7 @@
     $statement = $conn->query("SELECT * FROM genres");
     $genres = $statement->fetchAll(PDO::FETCH_ASSOC);
 
-    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true){ //zet in commentaar als je de admin page wil zien
+    if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true){
         //gebruiker is niet ingelogd, redirect naar login.php
         header("Location: login.php");
         exit;
@@ -26,13 +26,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css?<?php echo time(); ?>"/>
+    <link rel="stylesheet" type="text/css" href="css/admin.css?<?php echo time(); ?>"/>
 </head>
 <body>
     <?php include_once("nav.inc.php"); ?>
 
-    <h2>Voeg een nieuw product toe</h2>
-    <form action="adminAddProduct.php" method="POST">
+    <h2>Voeg hier een nieuw product toe.</h2>
+    <form action="adminAddProduct.php" method="POST" class="product-form">
         <label for="product_name">Productnaam:</label>
         <input type="text" name="product_name" id="product_name" required> <br><br>
 
@@ -45,8 +45,8 @@
         <!--<label for="product_img">Afbeelding:</label>
         <input type="file" name="product_img" id="product_img" required> <br><br>-->
         
-        <label for="genre" style="">Selecteer een genre:</label>
-        <select name="genre" id="genre" style="color #292b35; background-color: white; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+        <label for="genre">Selecteer een genre:</label>
+        <select name="genre" id="genre">
             <option value="">Alle genres</option>
             <?php foreach($genres as $genre):?>
             <option value="<?php echo $genre['id']; ?>">
@@ -55,12 +55,10 @@
             <?php endforeach; ?>
         </select><br><br>
 
-        <button type="submit">Voeg product toe</button>
+        <button type="submit" class="submit-Btn">Voeg product toe</button>
     </form>
 
-     <!--Producten kunnen verwijderen (als admin!)-->
+    <!--Producten kunnen verwijderen (als admin!)-->
     
-
-
 </body>
 </html>

@@ -82,9 +82,15 @@
         <h3>€<?php echo $product['product_price']?></h3>
 
         <!--Producten kunnen verwijderen (als admin!)-->
-        <form method="POST" action="adminDeleteProduct">
+        <form method="POST" action="adminDeleteProduct.php">
             <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
             <button type="submit">Verwijder dit product</button>
+        </form>
+
+        <!--Producten kunnen bewerken (als admin)-->
+        <form method="GET" action="adminEditProduct.php">
+            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+            <button type="submit">Bewerk het product</button>
         </form>
 
     </article>
