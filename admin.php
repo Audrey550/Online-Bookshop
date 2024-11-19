@@ -5,11 +5,6 @@
     session_start();
     $conn = Db::getConnection();
 
-    //Controleer of er een success-queryparameter is
-    /*if(isset($_GET['success']) && $_GET['success'] == 1){
-        echo "<p style='color:green;'>Categorie is succesvol toegevoegd.</p>";
-    }*/
-
     //SELECT * from genres, om de producten per genre te laten filteren
     $statement = $conn->query("SELECT * FROM genres");
     $genres = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -21,7 +16,7 @@
 
         //var_dump($genre_name); Debug: Check wat hier wordt opgehaald
         if(empty($genre_name)){
-            echo "<p style='color:red;'>De naam van de categorie mag niet leeg zijn.</p>";
+            echo "<p>De naam van de categorie mag niet leeg zijn.</p>";
             exit;
         }
 
@@ -34,13 +29,13 @@
             //Voer de query uit
             if($statement->execute()){
                 //Redirect na een succesvolle toevoeging
-                header("Location: " . $_SERVER['PHP_SELF'] . "?success=1"); //Beëindig script om dubbele verzending te voorkomen
+                header("Location: admin.php");
                 exit;
             }else{
-                echo "<p style='Color; red;'>Er is een fout opgetreden, de categorie kan niet worden toegevoegd.</p>";
+                echo "<p>Er is een fout opgetreden, de categorie kan niet worden toegevoegd.</p>";
             }
         }catch(PDOException $e){
-            echo "<p style='Color; red;'>Er is een fout opgetreden:" . $e->getMessage() . "</p>";
+            echo "<p>Er is een fout opgetreden:" . $e->getMessage() . "</p>";
         }
     }
 
