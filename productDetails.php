@@ -1,4 +1,4 @@
-<?php 
+<?php
     include_once(__DIR__ . "/classes/Db.php");
     session_start();
 

@@ -11,14 +11,11 @@
 
         $client = Client::getByEmail($email); // Haalt de gebruiker op via het email adres
 
-        
         if($client && password_verify($password, $client->getPassword())){
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $client->getUsername();
             $_SESSION['usertype'] = $client->getUsertype(); //slaagt een ysertype op in de sessie 
-
-            //Debugging
-            //var_dump($_SESSION); exit();
+            //$_SESSION['id'] = $client->getId();
 
             if($_SESSION['usertype'] == 1){
                 header("Location: admin.php");
