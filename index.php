@@ -9,6 +9,18 @@
         header('Location: signup.php'); //login.php verandert naar signup.php
     }
 
+    //Aantal woorden dat ik wil tonen in de productbeschrijving
+    $word_limit = 35;
+
+    //Verkort de tekstfunctie
+    function truncate_text($text, $limit){
+        $words = explode(' ', $text);
+        if(count($words) > $limit){
+            return implode(' ', array_slice($words, 0, $limit)) . '...';
+        }
+        return $text;
+    }
+
     $conn = Db::getConnection();
 
     $sql = "SELECT * FROM products";
@@ -72,13 +84,24 @@
    <div class="product-container">
     <?php foreach($products as $product): ?>
     <article class="product">
-        <h2 class="product-name"><?php echo $product['product_name']?></h2>
+        <h2 class="product-name">
+        <a href="productDetails.php?id=<?php echo $product['id']; ?>">
+            <?php echo $product['product_name']; ?>
+        </a> 
+        </h2>
 
         <!--<a href="productDetails.php">De img code van lijn 78</a>-->
         <img src="<?php echo"./".htmlspecialchars($product['product_img']);?>" class="product-img">
         
-        <h4 class="product-description"><?php echo $product['product_description']?></h4>
-        <h3>€<?php echo $product['product_price']?></h3>
+        <!--Beperkt de beschrijving tot een bepaald aantal woorden-->
+        <h4 class="product-description"><?php echo (htmlspecialchars(truncate_text($product['product_description'], $word_limit))); ?>
+
+        <!--Als de beschrijving te lang is, word er een "lees meer" link getoond-->
+        <?php if(str_word_count($product['product_description']) > $word_limit): ?>
+            <a href="productDetails.php?id=<?php echo $product['id'];?>" class="readMore">Lees meer</a>            
+        <?php endif; ?>
+        </h4>
+        <h3>€<?php echo $product['product_price'];?></h3>
 
         <!--Producten kunnen bewerken (als admin)-->
         <?php if($_SESSION['usertype'] == 1): ?>

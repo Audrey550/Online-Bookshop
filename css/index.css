@@ -188,11 +188,15 @@ nav input{
 }
 
 /*De naam van het product (titel van het boek)*/
-.product-name{
+.product-container{
+    text-align: center;
+}
+
+.product-name a{
     color: white;
+    text-decoration: none;
     font-size: 20px;
     margin-bottom: 15px;
-    text-align: center;
 }
 
 /*De afbeelding van het product*/
@@ -243,5 +247,60 @@ nav input{
 
 .edit-Btn:hover, .delete-Btn:hover{
     background-color: aquamarine;
+    color: #2a2454;
+}
+
+/*productDetails.php*/
+.product-details{
+    display: flex;
+    background-color: #8e3f3f;
+    align-items: stretch; /*Zorgt dat alle afbeeldingen dezelfde hoogte hebben*/
+    gap: 15px;
+    padding: 20px;
+}
+
+.product-image img{
+    max-width: 300px;
+    margin: 20px 25px;
+    object-fit: contain; /*behoud de aspect ratio van de afbeelding*/
+}
+
+.product-info h1{
+    display: flex;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product-info{
+    color: white;
+}
+
+.product-info p{
+    max-width: 800px;
+    margin-bottom: 15px;
+    line-height: 1.5; /*Zorgt voor betere leesbaarheid*/
+    word-spacing: -1px; /*vekrleint direct de ruimte tussen woorden*/
+    hyphens: auto; /*Zorgt dat woorden automatisch worden afgebroken*/
+}
+
+.product-details a{
+    text-decoration: none;
+    background-color: #2a2454;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.product-details a:hover{
+    background-color: aquamarine;
+    color: #2a2454;   
+}
+
+.readMore{
+    font-size: 16px;
+    font-weight: bold;
     color: #2a2454;
 }
