@@ -76,8 +76,8 @@
         <label for="product_price">Prijs (€):</label>
         <input type="number" name="product_price" id="product_price" step="0.01" required> <br><br>
         
-        <label for="product_img">Afbeelding:</label>
-        <input type="file" name="product_img" id="product_img" required> <br><br>
+        <!--<label for="product_img">Afbeelding:</label>
+        <input type="file" name="product_img" id="product_img" required> <br><br>-->
         
         <label for="genre">Selecteer een genre:</label>
         <select name="genre" id="genre">
