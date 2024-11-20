@@ -1,7 +1,7 @@
 <nav>
     <a href="index.php">Home</a>
     <a href="#">About</a>
-    <a href="#">Browse</a>
+    <a href="browse.php">Browse</a>
     <a href="#">Contact</a>
 
     <form action="" method="get">
