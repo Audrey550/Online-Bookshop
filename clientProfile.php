@@ -3,27 +3,27 @@
      include_once(__DIR__ . "/classes/Client.php");
 
     session_start();
-    var_dump($_SESSION);
+   //var_dump($_SESSION);
     //exit;
 
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
         header("Location: login.php");
         exit;
     }
+    //var_dump($_SESSION['email']);
 
-    $client = Client::getByEmail($_SESSION['username']);
+    $client = Client::getByEmail($_SESSION['email']);
+    //var_dump($client);
+    //exit;
 
-    $conn = Db::getConnection();
-
-    $statement = $conn->prepare("SELECT username, email FROM clients WHERE id = :id");
-    $statement->bindParam(':id', $client_id, PDO::PARAM_INT);
+    //$conn = Db::getConnection();
+    /*$statement = $conn->prepare("SELECT username, email FROM clients WHERE id = :id");
+    $statement->bindParam(':id', $_SESSION['id'], PDO::PARAM_INT);
     $statement->execute();
-    $client = $statement->fetch(PDO::FETCH_ASSOC);
+    $client = $statement->fetch(PDO::FETCH_ASSOC);*/
 
     if(!$client){
         echo "Er is een probleem met het ophalen van je gegevens. Probeer opnieuw in te loggen aub.";
-        //session_destroy();
-        //header("Location: login.php");
         exit;
 }
 ?><!DOCTYPE html>
@@ -38,8 +38,8 @@
     <?php include_once("nav.inc.php"); ?>
 
     <div class="user-details">
-        <h1>Welkom, <?php echo htmlspecialchars($client['username']);?></h1>
-        <p><strong>Email:</strong><?php echo htmlspecialchars($client['email']); ?></p>
+        <h1>Welkom, <?php echo htmlspecialchars($client->getUsername());?></h1>
+        <p><strong>Email:</strong><?php echo htmlspecialchars($client->getEmail()); ?></p>
     </div>
 
 </body>

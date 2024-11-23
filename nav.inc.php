@@ -11,7 +11,8 @@
     <div class="nav__logout">
             <!--Controleert of de gebruiker is ingelogd-->
         <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
-            <!--Logout knop-->
+            <!--Logout knop--> 
+
             <a href="logout.php" class="logout">Hi <?php echo htmlspecialchars($_SESSION['username']); ?>, logout?</a>
 
             <!--Profiellink afhangend van wat soort gebruiker het is-->

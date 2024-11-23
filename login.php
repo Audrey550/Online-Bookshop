@@ -14,8 +14,11 @@
         if($client && password_verify($password, $client->getPassword())){
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $client->getUsername();
+            $_SESSION['email'] = $client->getEmail();
             $_SESSION['usertype'] = $client->getUsertype(); //slaagt een ysertype op in de sessie 
-            //$_SESSION['id'] = $client->getId();
+            $_SESSION['id'] = $client->getId();
+
+            //var_dump($_SESSION); 
 
             if($_SESSION['usertype'] == 1){
                 header("Location: admin.php");
@@ -75,6 +78,3 @@
     </div>
 </body>
 </html>
-
-
-<!--Aanpassen: add usertype, admin stuff-->

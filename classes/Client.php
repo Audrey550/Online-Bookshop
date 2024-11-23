@@ -1,32 +1,32 @@
 <?php 
     include_once(__DIR__."/Db.php");
     class Client{
-        //private $id;
+        private $id;
         private $username;
         private $email;
         private $password;
         private $usertype;
-
-        /* Voeg dit eventueel later terug toe !!
-          Get the value of id
-         
+        
+        /**
+         * Get the value of id
+         */ 
         public function getId()
         {
                 return $this->id;
         }
 
-       
-          Set the value of id
-         
-          @return  self
-         
+        /**
+         * Set the value of id
+         *
+         * @return  self
+         */ 
         public function setId($id)
         {
                 $this->id = $id;
 
                 return $this;
-        }*/ 
-
+        }
+    
         /**
          * Get the value of username
          */ 
@@ -108,7 +108,7 @@
 
         public function save(){
             //conn
-            //$conn = new PDO('mysql:host=localhost;dbname=bookshop', 'root', '');
+            $conn = new PDO('mysql:host=localhost;dbname=bookshop', 'root', '');
             $conn = Db::getConnection();
             
             //insert query
@@ -129,10 +129,11 @@
                 $statement->execute();
 
                 $result = $statement->fetch(PDO::FETCH_ASSOC);
+                //var_dump($result);
 
                 if($result){
                         $client = new Client();
-                        //$client->setId($result['id']);
+                        $client->setId($result['id']);
                         $client->username = $result['username'];
                         $client->email = $result['email'];
                         $client->password = $result['password']; //Haalt direct het gehashte wachtwoord op
@@ -148,6 +149,7 @@
             $statement = $conn->query("SELECT * FROM clients");
             return $statement->fetchAll();
         } 
+
 }
 
 /*0 = regular
