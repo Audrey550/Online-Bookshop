@@ -2,6 +2,7 @@
     //PDO Connection
     include_once(__DIR__ . "/classes/Db.php");
     include_once(__DIR__ . "/classes/Client.php");
+    include_once(__DIR__ . "/classes/Product.php");
 
 
     session_start(); //Zo weet de server wie jij bent
@@ -23,7 +24,7 @@
 
     $conn = Db::getConnection();
 
-    $sql = "SELECT * FROM products";
+    //$sql = "SELECT * FROM products";
 
     //SELECT * from genres, om de producten per genre te laten filteren
     $statement = $conn->query("SELECT * FROM genres");
@@ -40,6 +41,9 @@
     //SELECT * from products and fetch as array:
     $statement->execute();
     $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    //Haal de 5 meest recent toegevoegde producten op
+    $recentProducts = Product::getRecentProducts(5);
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -64,9 +68,11 @@
                 <h3>Get A Life, Chloe Brown <br> Talia Hibbert</h3>
             </div>
     </div>
-    
+
+    <!--De recente producten titel-->
+    <h2 class="recent-products-title">Nieuwe boeken, net binnen!</h2>
+
     <!--Dropdown menu om de producten per genre te kunnen filteren-->
-    <h2 class="genre-h2">Bekijk onze boeken</h2>
     <form method="POST" action="">
         <label for="genre" class="genre-title">Filter op genre:</label>
         <select name="genre" id="genre" class="genre-select">
@@ -79,31 +85,28 @@
         </select>
         <button type="submit" class="search-Btn">Zoek</button>
     </form>
-    
-   <!--De producten op de pagina displayen--> 
-   <div class="product-container">
-    <?php foreach($products as $product): ?>
-    <article class="product">
-        <h2 class="product-name">
-        <a href="productDetails.php?id=<?php echo $product['id']; ?>">
-            <?php echo $product['product_name']; ?>
-        </a> 
-        </h2>
 
-        <!--<a href="productDetails.php">De img code van lijn 78</a>-->
-        <img src="<?php echo"./".htmlspecialchars($product['product_img']);?>" class="product-img">
-        
-        <!--Beperkt de beschrijving tot een bepaald aantal woorden-->
-        <h4 class="product-description"><?php echo (htmlspecialchars(truncate_text($product['product_description'], $word_limit))); ?>
+    <!--De recente producten op de pagina displayen-->
+    <div class="recent-products-container">
+        <?php foreach($recentProducts as $product): ?>
+        <article class="recent-product">
+            <h2 class="product-name">
+            <a href="productDetails.php?id=<?php echo $product['id']; ?>">
+                <?php echo $product['product_name']; ?>
+            </a> 
+            </h2>
 
-        <!--Als de beschrijving te lang is, word er een "lees meer" link getoond-->
-        <?php if(str_word_count($product['product_description']) > $word_limit): ?>
-            <a href="productDetails.php?id=<?php echo $product['id'];?>" class="readMore">Lees meer</a>            
-        <?php endif; ?>
-        </h4>
-        <h3>€<?php echo $product['product_price'];?></h3>
+            <img src="<?php echo"./".htmlspecialchars($product['product_img']);?>" class="product-img">
+            <h4 class="product-description"><?php echo (htmlspecialchars(truncate_text($product['product_description'], $word_limit))); ?>
 
-        <!--Producten kunnen bewerken (als admin)-->
+            <?php if(str_word_count($product['product_description']) > $word_limit): ?>
+                <a href="productDetails.php?id=<?php echo $product['id'];?>" class="readMore">Lees meer</a>            
+            <?php endif; ?>
+            </h4>
+            <h3>€<?php echo $product['product_price'];?></h3>
+        </article>
+        <?php endforeach; ?>
+
         <?php if($_SESSION['usertype'] == 1): ?>
         <form method="GET" action="adminEditProduct.php">
             <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
@@ -116,8 +119,6 @@
             <button type="submit" class="delete-Btn">Verwijder dit product</button>
         </form>
         <?php endif ?>
-    </article>
-    <?php endforeach; ?>
     </div>
 </body>
 </html>

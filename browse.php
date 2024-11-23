@@ -2,7 +2,7 @@
     //PDO Connection
     include_once(__DIR__ . "/classes/Db.php");
     include_once(__DIR__ . "/classes/Client.php");
-
+    include_once(__DIR__ . "/classes/Product.php");
 
     session_start(); //Zo weet de server wie jij bent
         if($_SESSION['loggedin']!== true){
@@ -37,17 +37,17 @@
         $statement = $conn->prepare('SELECT * FROM products');
     }
 
-    
     //SELECT * from products and fetch as array:
     $statement->execute();
     $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browse Products</title>
-    <link rel="stylesheet" type="text/css" href="css/index.css?<?php echo time(); ?>"/>
+    <link rel="stylesheet" type="text/css" href="css/browse.css?<?php echo time(); ?>"/>
 </head>
 <body>
     <?php include_once("nav.inc.php"); ?>
