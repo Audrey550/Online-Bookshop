@@ -4,7 +4,6 @@
     include_once(__DIR__ . "/classes/Client.php");
     include_once(__DIR__ . "/classes/Product.php");
 
-
     session_start(); //Zo weet de server wie jij bent
         if($_SESSION['loggedin']!== true){
         header('Location: signup.php'); //login.php verandert naar signup.php
@@ -24,7 +23,7 @@
 
     $conn = Db::getConnection();
 
-    //$sql = "SELECT * FROM products";
+    $sql = "SELECT * FROM products";
 
     //SELECT * from genres, om de producten per genre te laten filteren
     $statement = $conn->query("SELECT * FROM genres");
@@ -69,10 +68,8 @@
             </div>
     </div>
 
-    <!--De recente producten titel-->
-    <h2 class="recent-products-title">Nieuwe boeken, net binnen!</h2>
-
     <!--Dropdown menu om de producten per genre te kunnen filteren-->
+    <h2 class="recent-products-title">Nieuwe boeken, net binnen!</h2>
     <form method="POST" action="">
         <label for="genre" class="genre-title">Filter op genre:</label>
         <select name="genre" id="genre" class="genre-select">
