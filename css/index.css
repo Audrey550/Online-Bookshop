@@ -67,18 +67,18 @@ nav input{
 
 /*header visual*/
 .headerimg{
-    display: flex;
+    display: block;
     width: 60%;
-    height: 60%;
+    height: auto;
     margin-left: auto;
     margin-right: auto;
 }
 
 /*categorie icons*/
 .categoryIcons img{
-    display: flex;
+    display: block;
     width: 40%;
-    height: 40%;
+    height: auto;
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
@@ -131,7 +131,6 @@ nav input{
     width: 500px;
 }
 
-
 /*Items*/
 .genre-h2{
     font-weight: lighter;
@@ -140,7 +139,7 @@ nav input{
 }
 /*Het genre dropdown menu*/
 .genre-title{
-    margin-left: 20px;
+    margin-left: 40px;
     font-weight: bold;
     font-size: 20px;
 }
@@ -168,7 +167,9 @@ nav input{
     color: #2a2454;
 }
 
-.product-container{
+
+/*Most recent products*/
+.recent-products-container{
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 15px;
@@ -176,7 +177,7 @@ nav input{
     align-items: stretch; /*Zorgt dat alle afbeeldingen dezelfde hoogte hebben*/
 }
 
-.product{
+.recent-product{
     display: flex;
     flex-direction: column;
     justify-content:space-between;
@@ -199,7 +200,6 @@ nav input{
     margin-bottom: 15px;
 }
 
-/*De afbeelding van het product*/
 .product-img{
     width: 100%;
     height: auto;
@@ -209,7 +209,6 @@ nav input{
     object-fit: contain; /*behoud de aspect ratio van de afbeelding*/
 }
 
-/*De beschrijving van het product*/
 .product-description{
     display: inline-block;
     color: #f4e6d4;
@@ -247,60 +246,5 @@ nav input{
 
 .edit-Btn:hover, .delete-Btn:hover{
     background-color: aquamarine;
-    color: #2a2454;
-}
-
-/*productDetails.php*/
-.product-details{
-    display: flex;
-    background-color: #8e3f3f;
-    align-items: stretch; /*Zorgt dat alle afbeeldingen dezelfde hoogte hebben*/
-    gap: 15px;
-    padding: 20px;
-}
-
-.product-image img{
-    max-width: 300px;
-    margin: 20px 25px;
-    object-fit: contain; /*behoud de aspect ratio van de afbeelding*/
-}
-
-.product-info h1{
-    display: flex;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.product-info{
-    color: white;
-}
-
-.product-info p{
-    max-width: 800px;
-    margin-bottom: 15px;
-    line-height: 1.5; /*Zorgt voor betere leesbaarheid*/
-    word-spacing: -1px; /*vekrleint direct de ruimte tussen woorden*/
-    hyphens: auto; /*Zorgt dat woorden automatisch worden afgebroken*/
-}
-
-.product-details a{
-    text-decoration: none;
-    background-color: #2a2454;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 12px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.product-details a:hover{
-    background-color: aquamarine;
-    color: #2a2454;   
-}
-
-.readMore{
-    font-size: 16px;
-    font-weight: bold;
     color: #2a2454;
 }
