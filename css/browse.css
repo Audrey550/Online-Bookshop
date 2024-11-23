@@ -1,0 +1,222 @@
+* {
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #e4c595;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+/*Navigatie Balk*/
+nav{
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+nav a{
+    color: #292b35;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 20px;
+    transition: 0.5s;
+}
+
+nav a:hover{ 
+    color:aquamarine; 
+    transition: 250ms ease-in-out;
+    transform: scale(1.1);
+}
+
+/*the search bar*/
+nav input{
+    padding: 0.5em;
+    background-color: #d5a55a;
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+
+    margin-top: -10px; /*find another way to align this better*/
+    margin-left: 20px;
+}
+
+::placeholder{ 
+    color: white;
+}
+
+.nav__logout{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: auto;
+}
+
+.nav__logout a{
+    display: flex;
+}
+
+.nav__logout img{
+    display: block; /*zorgt ervoor dat de afbeeldingen consistent zijn in gedrag*/
+    width: 50px;
+    height: 50px;
+}
+
+/*header visual*/
+.headerimg{
+    display: block;
+    width: 60%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*categorie icons*/
+.categoryIcons img{
+    display: block;
+    width: 40%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+/*All products - smijt dit eventueel in een nieuwe browse.css*/
+.product-container{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin: 20px;
+    align-items: stretch; /*Zorgt dat alle afbeeldingen dezelfde hoogte hebben*/
+}
+
+.product{
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+    background-color: #8e3f3f;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+/*De naam van het product (titel van het boek)*/
+.product-container{
+    text-align: center;
+}
+
+.product-name a{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/*De afbeelding van het product*/
+.product-img{
+    width: 100%;
+    height: auto;
+    max-width: 150px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    object-fit: contain; /*behoud de aspect ratio van de afbeelding*/
+}
+
+/*De beschrijving van het product*/
+.product-description{
+    display: inline-block;
+    color: #f4e6d4;
+    font-size: 15px;
+    font-weight: lighter;
+    text-align: justify;
+    align-items: center;
+    justify-content: center;
+    word-spacing: -1px; /*vekrleint direct de ruimte tussen woorden*/
+    hyphens: auto; /*Zorgt dat woorden automatisch worden afgebroken*/
+    margin: 10px 0;
+    min-height: 150px;
+}
+
+/*De prijs van het product*/
+.product h3{ 
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+/*Knoppen om producten te verwijderen en aan te passen*/
+.edit-Btn, .delete-Btn{
+    background-color: #2a2454;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.delete-Btn{
+    margin-top: 10px;
+}
+
+.edit-Btn:hover, .delete-Btn:hover{
+    background-color: aquamarine;
+    color: #2a2454;
+}
+
+/*productDetails.php*/
+.product-details{
+    display: flex;
+    background-color: #8e3f3f;
+    align-items: stretch; /*Zorgt dat alle afbeeldingen dezelfde hoogte hebben*/
+    gap: 15px;
+    padding: 20px;
+}
+
+.product-image img{
+    max-width: 300px;
+    margin: 20px 25px;
+    object-fit: contain; /*behoud de aspect ratio van de afbeelding*/
+}
+
+.product-info h1{
+    display: flex;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.product-info{
+    color: white;
+}
+
+.product-info p{
+    max-width: 800px;
+    margin-bottom: 15px;
+    line-height: 1.5; /*Zorgt voor betere leesbaarheid*/
+    word-spacing: -1px; /*vekrleint direct de ruimte tussen woorden*/
+    hyphens: auto; /*Zorgt dat woorden automatisch worden afgebroken*/
+}
+
+.product-details a{
+    text-decoration: none;
+    background-color: #2a2454;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.product-details a:hover{
+    background-color: aquamarine;
+    color: #2a2454;   
+}
+
+.readMore{
+    font-size: 16px;
+    font-weight: bold;
+    color: #2a2454;
+}
