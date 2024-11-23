@@ -169,6 +169,12 @@ nav input{
 
 
 /*Most recent products*/
+.recent-products-title{
+    font-weight: bold;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+
 .recent-products-container{
     display: grid;
     grid-template-columns: repeat(5, 1fr);

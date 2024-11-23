@@ -83,6 +83,42 @@ nav input{
     margin-top: 20px;
 }
 
+/*Het genre dropdown menu*/
+.genre-h2{
+    font-weight: lighter;
+    margin-left: 50px;
+    margin-top: 30px;
+}
+
+.genre-title{
+    margin-left: 40px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.genre-select{
+    color: #292b35;
+    background-color: white;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/*De zoekknop*/
+.search-Btn{
+    color: white;
+    background-color: #2a2454;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-Btn:hover{
+    background-color: aquamarine;
+    color: #2a2454;
+}
+
 /*All products - smijt dit eventueel in een nieuwe browse.css*/
 .product-container{
     display: grid;
