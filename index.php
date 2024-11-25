@@ -101,8 +101,6 @@
             <?php endif; ?>
             </h4>
             <h3>€<?php echo $product['product_price'];?></h3>
-        </article>
-        <?php endforeach; ?>
 
         <?php if($_SESSION['usertype'] == 1): ?>
         <form method="GET" action="adminEditProduct.php">
@@ -116,8 +114,8 @@
             <button type="submit" class="delete-Btn">Verwijder dit product</button>
         </form>
         <?php endif ?>
+        </article>
+        <?php endforeach; ?>
     </div>
 </body>
 </html>
-
-<!--Make it so that there's you only display the four recently added product from your database here!-->
