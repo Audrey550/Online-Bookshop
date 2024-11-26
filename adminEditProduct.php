@@ -10,8 +10,18 @@
 
     $conn = Db::getConnection();
 
+    //Haal alle genres op
+    $statement = $conn->query("SELECT * FROM genres");
+    $statement->execute();
+    $genres = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    //Haal auteurs op
+    $statement = $conn->query("SELECT * FROM authors");
+    $statement->execute();
+    $authors = $statement->fetchAll(PDO::FETCH_ASSOC);
+
     if($_SERVER['REQUEST_METHOD'] === 'GET'){
-        //Haal het product_ID op uit de url
+    //Haal het product_ID op uit de url
     if(isset($_GET['product_id'])){
         $product_id = $_GET['product_id'];
 
@@ -31,20 +41,24 @@
     }
 }elseif ($_SERVER['REQUEST_METHOD'] === 'POST'){
     //De wijzegingen van het product verwerken
-    if(isset($_POST['product_id'], $_POST['product_name'], $_POST['product_description'], $_POST['product_price'])){
+    if(isset($_POST['product_id'], $_POST['product_name'], $_POST['product_description'], $_POST['product_price'], $_POST['genre'])){
         $product_id = $_POST['product_id'];
         $product_name = htmlspecialchars($_POST['product_name']);
         $product_description = htmlspecialchars($_POST['product_description']);
         $product_price = $_POST['product_price'];
+        $genre_id = $_POST['genre'];
+        $author_id = $_POST['author'];
 
         try{
-            $sql = "UPDATE products SET product_name = :product_name, product_description = :product_description, product_price = :product_price WHERE id = :product_id";
+            $sql = "UPDATE products SET product_name = :product_name, product_description = :product_description, product_price = :product_price, genre_id = :genre_id WHERE id = :product_id";
 
             $statement = $conn->prepare($sql);
             $statement->bindParam(':product_id', $product_id);
             $statement->bindParam(':product_name', $product_name);
             $statement->bindParam(':product_description', $product_description);
             $statement->bindParam(':product_price', $product_price);
+            $statement->bindParam(':genre_id', $genre_id);
+            $statement->bindParam(':author_id', $author_id);
 
             if($statement->execute()){
                 echo "Product is bijgewerkt!";
@@ -97,8 +111,20 @@
                 <?php endforeach; ?>
             </select><br><br>
 
+            <label for="author">Selecteer een auteur:</label>
+            <select name="author" id="author">
+                <option value="">Alle auteurs</option>
+                    <?php foreach($authors as $author):?>
+                <option value="<?php echo $author['id']; ?>">
+                    <?php echo htmlspecialchars($author['author_name']); ?>
+                </option>
+                <?php endforeach; ?>
+            </select><br><br>
+
             <button type="submit" class="submit-Btn">Wijzigingen opslaan</button>
         </form>
     <?php endif; ?>
 </body>
 </html>
+
+<!--Kan genres en auteurs niet aanpassen-->
