@@ -114,6 +114,7 @@ nav input{
     min-height: 100px;
 }
 
+/*Genre dropdown*/
 select#genre{
     color: #292b35;
     background-color: white;
@@ -123,6 +124,19 @@ select#genre{
 }
 
 select#genre option{
+    color: #292b35;
+}
+
+/*Author dropdown*/
+select#author{
+    color: #292b35;
+    background-color: white;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+select#author option{
     color: #292b35;
 }
 
