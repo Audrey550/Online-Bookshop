@@ -8,8 +8,10 @@
     if(isset($_GET['id']) && !empty($_GET['id'])) {
         $product_id = $_GET['id'];
 
-    //Haal de productgegevens op op basis van het product-id
-    $statement = $conn->prepare('SELECT * FROM products WHERE id = :id');
+    //Haal de productgegevens en auteurs op op basis van het product-id
+    $statement = $conn->prepare('SELECT p.*, a.author_name FROM products p LEFT JOIN authors a ON p.author_id = a.id WHERE p.id = :id');
+
+    //$statement = $conn->prepare('SELECT * FROM products WHERE id = :id');
     $statement->bindParam(':id', $product_id);
     $statement->execute();
     $product = $statement->fetch(PDO::FETCH_ASSOC);
@@ -43,6 +45,7 @@
         <div class="product-info">
         <h1><?php echo htmlspecialchars($product['product_name']);?></h1>
         <p>€<?php echo number_format($product['product_price'], 2, ',','.'); ?></p><!--Zorgt dat de cijfers decimaal zijn-->
+        <p><?php echo htmlspecialchars($product['author_name']);?></p>
         <p><?php echo htmlspecialchars($product['product_description']); ?></p>
 
         <!--Zorgt dat de cijfers decimaal zijn-->
