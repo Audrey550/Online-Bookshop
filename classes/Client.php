@@ -6,6 +6,7 @@
         private $email;
         private $password;
         private $usertype;
+        private $credits;
         
         /**
          * Get the value of id
@@ -106,18 +107,45 @@
                 $this->usertype = $usertype; //zet de usertype               
         }
 
+            /**
+         * Get the value of credits
+         */ 
+        public function getCredits()
+        {
+                return $this->credits;
+        }
+
+        /**
+         * Set the value of credits
+         *
+         * @return  self
+         */ 
+        public function setCredits($credits)
+        {
+                $this->credits = $credits;
+
+                return $this;
+        }
+
         public function save(){
             //conn
             $conn = new PDO('mysql:host=localhost;dbname=bookshop', 'root', '');
             $conn = Db::getConnection();
-            
+            //Als de gebruiker geen admin is, stel dan de credits in op 1000
+                if($this->usertype == 0){
+                        $this->credits = 1000;
+                }else{
+                        $this->credits = 0;
+                }
+
             //insert query
-            $statement = $conn->prepare("INSERT INTO clients (username, email, password, usertype) VALUES (:username, :email, :password, :usertype)"); 
+            $statement = $conn->prepare("INSERT INTO clients (username, email, password, usertype, credits) VALUES (:username, :email, :password, :usertype, :credits)"); 
 
             $statement->bindParam(":username", $this->username);
             $statement->bindParam(":email", $this->email);
             $statement->bindParam(":password", $this->password);
             $statement->bindParam(":usertype", $this->usertype); //Voeg usertype toe
+            $statement->bindParam(":credits", $this->credits); //Voeg credits toe
             return $statement->execute(); 
          
         }
@@ -138,10 +166,29 @@
                         $client->email = $result['email'];
                         $client->password = $result['password']; //Haalt direct het gehashte wachtwoord op
                         $client->usertype = $result['usertype']; 
+                        $client->credits = $result['credits'];
+
                         return $client;
                 }else{
                         return null; //heeft geen gebruiker gevonden
                 }
+        }
+
+        public function updateCredits($newCredits){
+                $conn = Db::getConnection();
+                $statement = $conn->prepare("UPDATE clients SET credits = :credits WHERE id = :id");
+                $statement->bindParam(":credits", $newCredits);
+                $statement->bindParam(":id", $this->id);
+                return $statement->execute();
+        }
+
+        public function updatePassword($newPassword){
+                $conn = Db::getConnection();
+                $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT); //Herhash het nieuwe wachtwoord
+                $statement = $conn->prepare("UPDATE clients SET password = :password WHERE id = :id");
+                $statement->bindParam(":password", $hashedPassword);
+                $statement->bindParam(":id", $this->id);
+                return $statement->execute();        
         }
 
         public static function getAll(){
@@ -149,8 +196,6 @@
             $statement = $conn->query("SELECT * FROM clients");
             return $statement->fetchAll();
         } 
-
 }
-
 /*0 = regular
 1 = admin */
