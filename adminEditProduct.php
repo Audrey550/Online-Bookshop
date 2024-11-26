@@ -126,5 +126,3 @@
     <?php endif; ?>
 </body>
 </html>
-
-<!--Kan genres en auteurs niet aanpassen-->
