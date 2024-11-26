@@ -60,10 +60,10 @@
 <body>
     <?php include_once("nav.inc.php"); ?>
 
-    <div class="user-details">
+    <div class="client-details">
         <h1>Welkom <?php echo htmlspecialchars($client->getUsername());?></h1>
-        <p><strong>Email:</strong><?php echo htmlspecialchars($client->getEmail()); ?></p>
-        <p><strong>Credits:</strong><?php echo htmlspecialchars($client->getCredits()); ?></p>
+        <p><strong>Email:</strong> <?php echo htmlspecialchars($client->getEmail()); ?></p>
+        <p><strong>Credits:</strong> <?php echo htmlspecialchars($client->getCredits()); ?></p>
     </div>
 
     <!--Formulier voor wachtwoord wijzigen-->
