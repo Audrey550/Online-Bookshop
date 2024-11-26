@@ -9,6 +9,40 @@
     $statement = $conn->query("SELECT * FROM genres");
     $genres = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+    //Haal alle auteurs op
+    $statement = $conn->query("SELECT * FROM authors");
+    $authors = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    //Logica om de auteurs te verwerken
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_author'])){
+        //Haal de waarde van author_name op
+        $author_name = htmlspecialchars($_POST['author_name']);
+
+        //var_dump($author_name); Debug: Check wat hier wordt opgehaald
+        if(empty($author_name)){
+            echo "<p>De naam van de auteur mag niet leeg zijn.</p>";
+            exit;
+        }
+
+        try{
+            //Bereid de query voor
+            $sql = "INSERT INTO authors (author_name) VALUES (:author_name)";
+            $statement = $conn->prepare($sql);
+            $statement->bindParam(':author_name', $author_name);
+
+            //Voer de query uit
+            if($statement->execute()){
+                //Redirect na een succesvolle toevoeging
+                header("Location: admin.php");
+                exit;
+            }else{
+                echo "<p>Er is een fout opgetreden, de auteur kan niet worden toegevoegd.</p>";
+            }
+        }catch(PDOException $e){
+            echo "<p>Er is een fout opgetreden:" . $e->getMessage() . "</p>";
+        }
+    }
+
     //Logica om de categorien te verwerken
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_category'])){
         //Haal de waarde van genre_name op
@@ -78,6 +112,16 @@
         
         <!--<label for="product_img">Afbeelding:</label>
         <input type="file" name="product_img" id="product_img" required> <br><br>-->
+
+        <label for="author">Selecteer een auteur:</label>
+        <select name="author" id="author">
+            <option value="">Alle auteurs</option>
+            <?php foreach($authors as $author): ?>
+            <option value="<?php echo $author['id']; ?>">
+                <?php echo htmlspecialchars($author['author_name']); ?>
+            </option>
+            <?php endforeach; ?>
+            </select><br><br>
         
         <label for="genre">Selecteer een genre:</label>
         <select name="genre" id="genre">
@@ -93,11 +137,19 @@
     </form>
 
     <!--Een nieuwe categorie toevoegen-->
-    <h2>Voeg een nieuwe categorie toe.</h2>
+    <h2>Voeg een nieuw genre toe.</h2>
     <form method="POST" class="category_form">
-        <label for="genre_name">Categorie naam:</label>
+        <label for="genre_name">Genre naam:</label>
         <input type="text" name="genre_name" id="genre_name" required> <br><br> 
-        <button type="submit" name="add_category" value="1" class="submit-Btn">Voeg categorie toe.</button>
+        <button type="submit" name="add_category" value="1" class="submit-Btn">Voeg genre toe</button>
+    </form>
+
+    <!--Een nieuwe auteur toevoegen-->
+    <h2>Voeg een nieuwe auteur toe.</h2>
+    <form method="POST" class="category_form">
+        <label for="author_name">Naam van de auteur:</label>
+        <input type="text" name="author_name" id="author_name" required> <br><br> 
+        <button type="submit" name="add_author" value="1" class="submit-Btn">Voeg auteur toe</button>
     </form>
     </div>
     </div>
