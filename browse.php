@@ -69,7 +69,7 @@
 
    <!--De producten op de pagina displayen--> 
    <div class="product-container">
-    <?php foreach($products as $product): ?>
+        <?php foreach($products as $product): ?>
     <article class="product">
         <h2 class="product-name">
         <a href="productDetails.php?id=<?php echo $product['id']; ?>">

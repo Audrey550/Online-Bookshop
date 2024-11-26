@@ -1,0 +1,14 @@
+{
+    "name": "audrey/online-bookshop",
+    "autoload": {
+        "psr-4": {
+            "App\\OnlineBookshop\\": "classes/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Audrey"
+        }
+    ],
+    "require": {}
+}
