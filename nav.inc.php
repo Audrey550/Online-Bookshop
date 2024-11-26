@@ -13,7 +13,7 @@
         <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
             <!--Logout knop--> 
 
-            <a href="logout.php" class="logout">Hi <?php echo htmlspecialchars($_SESSION['username']); ?>, logout?</a>
+            <a href="logout.php" class="logout">Hallo <?php echo htmlspecialchars($_SESSION['username']); ?>, logout?</a>
 
             <!--Profiellink afhangend van wat soort gebruiker het is-->
             <a href="<?php echo ($_SESSION['usertype'] == 1)? 'admin.php' : 'clientProfile.php'; ?>"><img src="img/profileIcon.png"></a>
