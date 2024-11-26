@@ -68,7 +68,7 @@
             </div>
     </div>
 
-    <!--Dropdown menu om de producten per genre te kunnen filteren-->
+    <!--Dropdown menu om de producten per genre te kunnen filteren. Delete from index later!!--> 
     <h2 class="recent-products-title">Nieuwe boeken, net binnen!</h2>
     <form method="POST" action="">
         <label for="genre" class="genre-title">Filter op genre:</label>
