@@ -16,9 +16,10 @@
         $product_price = $_POST['product_price'];
         //$product_img = $_POST['product_img'];
         $genre_id = $_POST['genre'];
+        $author_id = $_POST['author'];
 
         try{ 
-            $sql = "INSERT INTO products(product_name, product_description, product_price, genre_id) VALUES (:product_name, :product_description, :product_price, :genre_id)";
+            $sql = "INSERT INTO products(product_name, product_description, product_price, genre_id, author_id) VALUES (:product_name, :product_description, :product_price, :genre_id, :author_id)";
 
             $statement = $conn->prepare($sql);
 
@@ -27,6 +28,7 @@
             $statement->bindParam(':product_price', $product_price);
             //$statement->bindParam(':product_img', $product_img);
             $statement->bindParam(':genre_id', $genre_id);
+            $statement->bindParam(':author_id', $author_id);
 
             if($statement->execute()){
                 echo "Product succesvol toegevoegd";
