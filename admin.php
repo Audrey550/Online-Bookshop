@@ -3,16 +3,15 @@
     use App\OnlineBookshop\Db;
     use App\OnlineBookshop\Client;
 
-    session_start();
     $conn = Db::getConnection();
 
     //SELECT * from genres, om de producten per genre te laten filteren
     $statement = $conn->query("SELECT * FROM genres");
-    $genres = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $genres = $statement->fetch(\PDO::FETCH_ASSOC);
 
     //Haal alle auteurs op
     $statement = $conn->query("SELECT * FROM authors");
-    $authors = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $authors = $statement->fetch(\PDO::FETCH_ASSOC);
 
     //Logica om de auteurs te verwerken
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_author'])){

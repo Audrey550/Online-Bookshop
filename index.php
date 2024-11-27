@@ -4,8 +4,7 @@
     use App\OnlineBookshop\Client;
     use App\OnlineBookshop\Product;
 
-    session_start(); //Zo weet de server wie jij bent
-        if($_SESSION['loggedin']!== true){
+    if($_SESSION['loggedin']!== true){
         header('Location: signup.php'); //login.php verandert naar signup.php
     }
 

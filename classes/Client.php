@@ -160,7 +160,7 @@
                 $statement->bindParam(':email', $email);
                 $statement->execute();
 
-                $result = $statement->fetch(PDO::FETCH_ASSOC);
+                $result = $statement->fetch(\PDO::FETCH_ASSOC);
                 //var_dump($result);
 
                 if($result){

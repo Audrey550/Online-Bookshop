@@ -8,7 +8,7 @@
         public static function getConnection(){
             if(self::$conn === null){
                 //echo "👾";
-                return self::$conn = new PDO('mysql:host=localhost;dbname=bookshop', 'root', '');
+                return self::$conn = new \PDO('mysql:host=localhost;dbname=bookshop', 'root', '');
             }else{
                 echo "😎";
                 return self::$conn;

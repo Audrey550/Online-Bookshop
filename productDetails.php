@@ -2,8 +2,6 @@
     require_once __DIR__ . "/bootstrap.php";
     use App\OnlineBookshop\Db;    
     
-    session_start();
-
     $conn = Db::getConnection();
 
     //Controleer of er een 'id' in de url zit
@@ -16,7 +14,7 @@
     //$statement = $conn->prepare('SELECT * FROM products WHERE id = :id');
     $statement->bindParam(':id', $product_id);
     $statement->execute();
-    $product = $statement->fetch(PDO::FETCH_ASSOC);
+    $product = $statement->fetch(\PDO::FETCH_ASSOC);
 
     //Als het product niet gevonden is, geef dan een foutmelding
     if(!$product){

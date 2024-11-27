@@ -3,7 +3,6 @@
     use App\OnlineBookshop\Db;
     use App\OnlineBookshop\Client;
 
-    session_start();
    //var_dump($_SESSION);
     //exit;
 

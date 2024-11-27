@@ -4,8 +4,6 @@
     use App\OnlineBookshop\Client;
     use App\OnlineBookshop\Product;
 
-    session_start();
-
     if(!empty($_POST)){
         try{
         $email = $_POST['email'];

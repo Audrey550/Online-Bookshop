@@ -2,7 +2,6 @@
     require_once __DIR__ . "/bootstrap.php";
     use App\OnlineBookshop\Db;
 
-session_start();
 
 if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] != true || $_SESSION['usertype'] != 1){
     header("Location: index.php");
