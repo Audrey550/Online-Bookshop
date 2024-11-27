@@ -1,7 +1,6 @@
 <?php
     namespace App\OnlineBookshop;
- 
-
+    
     class Db{
         private static $conn = null; 
         //make sure to reuse a connection if it's already open. This is called a singleton pattern

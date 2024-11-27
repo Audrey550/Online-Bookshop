@@ -1,6 +1,6 @@
 <?php 
     //PDO Connection
-    require_once __DIR__ . "bootstrap.php";
+    require_once __DIR__ . "/bootstrap.php";
     use App\OnlineBookshop\Db;
     use App\OnlineBookshop\Client;
     use App\OnlineBookshop\Product;
