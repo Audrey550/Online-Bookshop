@@ -7,7 +7,8 @@
     },
     "authors": [
         {
-            "name": "Audrey"
+            "name": "Audrey",
+            "email": "r0982547@student.thomasmore.be"
         }
     ],
     "require": {}

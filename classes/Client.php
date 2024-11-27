@@ -1,6 +1,10 @@
 <?php 
-    include_once(__DIR__."/Db.php");
-    class Client{
+   namespace App\OnlineBookshop;
+
+   use App\OnlineBookshop\Db;
+   
+   
+   class Client{
         private $id;
         private $username;
         private $email;

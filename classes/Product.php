@@ -1,5 +1,5 @@
 <?php 
-    include_once(__DIR__."/Db.php");
+    namespace App\OnlineBookshop;
 
     class Product{
           //functie om de 5 meest recent toegevoegde producten op te halen
