@@ -1,8 +1,9 @@
 <?php 
     //PDO Connection
-    include_once(__DIR__ . "/classes/Db.php");
-    include_once(__DIR__ . "/classes/Client.php");
-    include_once(__DIR__ . "/classes/Product.php");
+    require_once __DIR__ . "bootstrap.php";
+    use App\OnlineBookshop\Db;
+    use App\OnlineBookshop\Client;
+    use App\OnlineBookshop\Product;
 
     session_start(); //Zo weet de server wie jij bent
         if($_SESSION['loggedin']!== true){

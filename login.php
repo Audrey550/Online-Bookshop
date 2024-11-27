@@ -1,6 +1,8 @@
 <?php    
-    include_once(__DIR__ . "/classes/Db.php");
-    include_once(__DIR__ . "/classes/Client.php");
+    require_once __DIR__ . "bootstrap.php";
+    use App\OnlineBookshop\Db;
+    use App\OnlineBookshop\Client;
+    use App\OnlineBookshop\Product;
 
     session_start();
 
