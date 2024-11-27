@@ -76,11 +76,11 @@ nav input{
 }
 
 .client-details h1{
-    color: aquamarine;
+    color: #f0ba64;
 }
 
 .client-details p{
-    color: white;
+    color: #f0e6d2;
     font-size: 18px;
     margin: 10px 0;
 }
@@ -91,7 +91,8 @@ nav input{
 
 .password-change-form{
     margin: 0px auto;
-    background-color: whitesmoke;
+    background-color: #f0ba64;
+    border: 5px solid white;
     width: 80%;
     padding: 20px;
     box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
@@ -101,7 +102,7 @@ nav input{
 
 .password-change-form h2{
     font-size: 24px;
-    color: #8e3f3f;
+    color: #292b35;
     margin-bottom: 20px;
 }
 
