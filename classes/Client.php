@@ -3,7 +3,6 @@
 
    use App\OnlineBookshop\Db;
    
-   
    class Client{
         private $id;
         private $username;

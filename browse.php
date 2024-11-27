@@ -39,7 +39,7 @@
 
     //SELECT * from products and fetch as array:
     $statement->execute();
-    $products = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $products = $statement->fetchAll(\PDO::FETCH_ASSOC);
     
 ?><!DOCTYPE html>
 <html lang="en">
