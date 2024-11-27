@@ -10,7 +10,7 @@
                 //echo "👾";
                 return self::$conn = new \PDO('mysql:host=localhost;dbname=bookshop', 'root', '');
             }else{
-                echo "😎";
+
                 return self::$conn;
             }
 

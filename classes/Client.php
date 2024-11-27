@@ -132,7 +132,7 @@
 
         public function save(){
             //conn
-            $conn = new PDO('mysql:host=localhost;dbname=bookshop', 'root', '');
+            $conn = new \PDO('mysql:host=localhost;dbname=bookshop', 'root', '');            
             $conn = Db::getConnection();
             //Als de gebruiker geen admin is, stel dan de credits in op 1000
                 if($this->usertype == 0){
