@@ -27,7 +27,7 @@
 
     //SELECT * from genres, om de producten per genre te laten filteren
     $statement = $conn->query("SELECT * FROM genres");
-    $genres = $statement->fetch(\PDO::FETCH_ASSOC);
+    $genres = $statement->fetchAll(PDO::FETCH_ASSOC);
 
     if(isset($_POST['genre']) && !empty($_POST['genre'])){
         $genre_id = $_POST['genre'];
@@ -39,7 +39,7 @@
 
     //SELECT * from products and fetch as array:
     $statement->execute();
-    $products = $statement->fetch(\PDO::FETCH_ASSOC);
+    $products = $statement->fetchAll(PDO::FETCH_ASSOC);
     
 ?><!DOCTYPE html>
 <html lang="en">
