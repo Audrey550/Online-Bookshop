@@ -22,19 +22,9 @@
 
     $conn = Db::getConnection();
 
-    $sql = "SELECT * FROM products";
-
     //SELECT * from genres, om de producten per genre te laten filteren
     $statement = $conn->query("SELECT * FROM genres");
     $genres = $statement->fetchAll(\PDO::FETCH_ASSOC);
-
-    if(isset($_POST['genre']) && !empty($_POST['genre'])){
-        $genre_id = $_POST['genre'];
-        $statement = $conn->prepare('SELECT * FROM products WHERE genre_id = :genre_id');
-        $statement->bindParam(':genre_id', $genre_id);
-    }else{
-        $statement = $conn->prepare('SELECT * FROM products');
-    }
 
     //SELECT * from products and fetch as array:
     $statement->execute();
@@ -42,6 +32,9 @@
 
     //Haal de 5 meest recent toegevoegde producten op
     $recentProducts = Product::getRecentProducts(5);
+
+    //Haalt alle producten op
+    $allProducts = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
 
 ?><!DOCTYPE html>
