@@ -47,10 +47,25 @@
         $product_name = htmlspecialchars($_POST['product_name']);
         $product_description = htmlspecialchars($_POST['product_description']);
         $product_price = $_POST['product_price'];
-        $genre_id = $_POST['genre'];
-        $author_id = $_POST['author'];
+
+        //Gebruik bestaande waarden als er geen niewue worden opgegeven
+        $genre_id = !empty($_POST['genre']) ? $_POST['genre'] : null;
+        $author_id = !empty($_POST['author']) ? $_POST['author'] : null;
 
         try{
+            //Haal de bestaande waarden op voor genre_id en author_id
+            $query = "SELECT genre_id, author_id FROM products WHERE id = :product_id";
+            $statement = $conn->prepare($query);
+            $statement->bindParam(':product_id', $product_id);
+            $statement->execute();
+            $exsistingValues = $statement->fetch(\PDO::FETCH_ASSOC);
+
+            if(!$genre_id){
+                $genre_id = $exsistingValues['genre_id'];
+            } if(!$author_id){
+                $author_id = $exsistingValues['author_id'];
+            }
+
             $sql = "UPDATE products SET product_name = :product_name, product_description = :product_description, product_price = :product_price, genre_id = :genre_id, author_id = :author_id WHERE id = :product_id";
 
             $statement = $conn->prepare($sql);
