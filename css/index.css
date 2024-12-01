@@ -192,6 +192,11 @@ nav input{
     padding: 15px;
     border-radius: 10px;
     margin: 10px;
+    transition: transform 0.3s ease;
+}
+
+.recent-product:hover{
+    transform: scale(1.05);
 }
 
 /*De naam van het product (titel van het boek)*/
