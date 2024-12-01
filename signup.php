@@ -5,6 +5,19 @@
 
     if(!empty($_POST)){
         try{
+            $email = $_POST['email'];
+
+            //Controleer of het emailadres al gebruikt word
+            $conn = Db::getConnection();
+            $statement = $conn->prepare("SELECT * FROM clients WHERE email = :email");
+            $statement->bindValue(':email', $email);
+            $statement->execute();
+            $existingClient = $statement->fetch();
+
+            if($existingClient){
+                $error = "Dit emailadres is al in gebruik. Probeer een ander emailadres.";
+            } else{
+                
             //Maakt een nieuw Client object aan
             $client = new Client();
             $client->setUsername($_POST['username']);
@@ -18,6 +31,8 @@
 
             //Redirect naar de loginpagina nadat de login gelukt is
             header("Location: login.php");
+            exit;
+        }
 
         }catch (Exception $e) {
             $error = "Error: " .$e->getMessage();//Haal de foutmelding op 
