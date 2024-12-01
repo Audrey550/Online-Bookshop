@@ -4,8 +4,8 @@
     <a href="browse.php">Browse</a>
     <a href="#">Contact</a>
 
-    <form action="" method="get">
-        <input type="text" name="search" placeholder="Search...">
+    <form action="search.php" method="get">
+        <input type="text" name="search" placeholder="Zoek op titel of auteur..." value="<?php echo htmlspecialchars($_GET['search']?? ''); ?>">
     </form>
 
     <div class="nav__logout">
