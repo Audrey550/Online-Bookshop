@@ -40,6 +40,28 @@
     //SELECT * from products and fetch as array:
     $statement->execute();
     $products = $statement->fetchAll(\PDO::FETCH_ASSOC);
+
+    //Toevoegen aan winkelmandje
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])){
+        $product_id = $_POST['product_id'];
+        $quantity = $_POST['quantity'] ?? 1;
+
+        //Controleer of de winkelmand al bestaat
+        if(!isset($_SESSION['cart'])){
+            $_SESSION['cart'] = [];
+        }
+
+        //Voeg het product toe aan de winkelmand
+        if(isset($_SESSION['cart'][$product_id])){
+            $_SESSION['cart'][$product_id] += $quantity;
+        }else{
+            $_SESSION['cart'][$product_id] = $quantity;
+        }
+
+        $_SESSION['feedback'] = "Product is toegevoegd aan de winkelmand!";
+        header('Location: browse.php');
+        exit;
+    }
     
 ?><!DOCTYPE html>
 <html lang="en">
@@ -51,6 +73,12 @@
 </head>
 <body>
     <?php include_once("nav.inc.php"); ?>
+
+    <!--Feedback aan de gebruiker tonen-->
+    <?php if(isset($_SESSION['feedback'])): ?>
+        <p class="feedbackMsg"><?php echo htmlspecialchars($_SESSION['feedback']); ?></p>
+        <?php unset($_SESSION['feedback']); ?>
+    <?php endif; ?>
 
     <!--Dropdown menu om de producten per genre te kunnen filteren-->
     <h2 class="genre-h2">Bekijk ons gans assortiment!</h2>
@@ -89,6 +117,14 @@
         <?php endif; ?>
         </h4>
         <h3>€<?php echo $product['product_price'];?></h3>
+
+        <!--Producten kunnen toevoegen aan winkelmandje-->
+        <form method="POST" action="browse.php">
+            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+            <label for="quantity-<?php echo $product['id']; ?>">Aantal:</label>
+            <input type="number" id="quantity-<?php echo $product['id']; ?>" name="quantity" value="1">
+            <button type="submit" name="add_to_cart" class="add_to_cartBtn">Voeg toe aan het winkelmandje</button>
+        </form>
 
         <!--Producten kunnen bewerken (als admin)-->
         <?php if($_SESSION['usertype'] == 1): ?>
