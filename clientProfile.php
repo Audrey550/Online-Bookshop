@@ -35,8 +35,9 @@
 
         if(password_verify($currentPassword, $client->getPassword())){
             if($newPassword === $confirmPassword){
-                $client->setPassword(password_hash($newPassword, PASSWORD_DEFAULT));
-                if($client->save()){
+                //$client->setPassword(password_hash($newPassword, PASSWORD_DEFAULT));
+            if($newPassword === $confirmPassword){
+                if($client->updatePassword($newPassword)){
                     echo "Wachtwoord is gewijzigd";
                 }else{
                     echo "Er is iets fout gegaan";
@@ -48,7 +49,7 @@
             echo "Huidige wachtwoord is niet correct";
         }
     }
-
+}    
 ?><!DOCTYPE html>
 <html lang="en">
 <head>

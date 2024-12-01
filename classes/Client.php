@@ -179,6 +179,7 @@
 
         public function updateCredits($newCredits){
                 $conn = Db::getConnection();
+                $hashedPassword = password_hash($newCredits, PASSWORD_DEFAULT); //Herhash het nieuwe wachtwoord
                 $statement = $conn->prepare("UPDATE clients SET credits = :credits WHERE id = :id");
                 $statement->bindParam(":credits", $newCredits);
                 $statement->bindParam(":id", $this->id);
