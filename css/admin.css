@@ -76,6 +76,7 @@ nav input{
     display: flex;
     flex-direction: column;
     width: 48%;
+    margin-top: -50px;
 }
 
 .form-section h2{
@@ -92,6 +93,7 @@ nav input{
     flex-direction: column;
     padding: 15px;
     width: 45%;
+    margin-top: 10px;
 }
 
 .product-form label{
