@@ -42,7 +42,7 @@
     }
 }elseif ($_SERVER['REQUEST_METHOD'] === 'POST'){
     //De wijzegingen van het product verwerken
-    if(isset($_POST['product_id'], $_POST['product_name'], $_POST['product_description'], $_POST['product_price'], $_POST['genre'])){
+    if(isset($_POST['product_id'], $_POST['product_name'], $_POST['product_description'], $_POST['product_price'], $_POST['genre'], $_POST['author'])){
         $product_id = $_POST['product_id'];
         $product_name = htmlspecialchars($_POST['product_name']);
         $product_description = htmlspecialchars($_POST['product_description']);
@@ -51,7 +51,7 @@
         $author_id = $_POST['author'];
 
         try{
-            $sql = "UPDATE products SET product_name = :product_name, product_description = :product_description, product_price = :product_price, genre_id = :genre_id WHERE id = :product_id";
+            $sql = "UPDATE products SET product_name = :product_name, product_description = :product_description, product_price = :product_price, genre_id = :genre_id, author_id = :author_id WHERE id = :product_id";
 
             $statement = $conn->prepare($sql);
             $statement->bindParam(':product_id', $product_id);
