@@ -44,9 +44,9 @@
 
         <div class="product-info">
         <h1><?php echo htmlspecialchars($product['product_name']);?></h1>
-        <p>€<?php echo number_format($product['product_price'], 2, ',','.'); ?></p><!--Zorgt dat de cijfers decimaal zijn-->
         <p><?php echo htmlspecialchars($product['author_name']);?></p>
         <p><?php echo htmlspecialchars($product['product_description']); ?></p>
+        <p>€<?php echo number_format($product['product_price'], 2, ',','.'); ?></p><!--Zorgt dat de cijfers decimaal zijn-->
 
         <!--Zorgt dat de cijfers decimaal zijn-->
         <a href="index.php" class="returnToHome">Ga terug naar de homepage</a>
