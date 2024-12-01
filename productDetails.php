@@ -50,6 +50,14 @@
 
         <!--Zorgt dat de cijfers decimaal zijn-->
         <a href="index.php" class="returnToHome">Ga terug naar de homepage</a>
+
+        <?php if($_SESSION['usertype'] == 1): ?>
+        <form method="GET" action="adminEditProduct.php">
+            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+            <button type="submit" class="edit-Btn" style="margin-top: 20px">Bewerk het product</button>
+        </form>
+        <?php endif ?>
+
         </div>
     </div>
 </body>
