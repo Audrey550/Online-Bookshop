@@ -4,9 +4,23 @@
     use App\OnlineBookshop\Client;
     use App\OnlineBookshop\Product;
 
+    /*SSL connection to Azure database
+    $pathToSSL = __DIR__ . '/DigiCertGlobalRootG2.crt.pem';
+    $options = array(
+            PDO::MYSQL_ATTR_SSL_CA => $pathToSSL);
+    $host = 'onlinebookshop.mysql.database.azure.com';
+    $db = 'onlinebookshop';
+    $user= 'onlinebookshop';
+    $pass = 'hA_5yZ**4n_mJ3O';
+    $db = new PDO("mysql:host=$host;port=3306;dbname=$db", $user, $pass, $options);
+    $users = $db->query('SELECT * FROM users');
+    var_dump($users->fetchAll());
+*/
+
+   /* //Check if user is logged in
     if($_SESSION['loggedin']!== true){
         header('Location: signup.php'); //login.php verandert naar signup.php
-    }
+    }*/
 
     //Aantal woorden dat ik wil tonen in de productbeschrijving
     $word_limit = 35;
