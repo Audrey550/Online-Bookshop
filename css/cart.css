@@ -1,0 +1,188 @@
+* {
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #e4c595;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+/*Navigatie Balk*/
+nav{
+    display: flex;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+nav a{
+    color: #292b35;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 20px;
+    transition: 0.5s;
+}
+
+nav a:hover{ 
+    color:aquamarine; 
+    transition: 250ms ease-in-out;
+    transform: scale(1.1);
+}
+
+/*Winkelmandje*/
+.nav-cart-link {
+    position: relative; /* Zorgt ervoor dat de teller binnen de link blijft */
+}
+
+.cart-count{
+    display: flex;
+    background-color: aquamarine;
+    color: #2a2454;
+    border-radius: 50%;
+    padding: 6px;
+    position: absolute;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    justify-content: center;
+    align-items: center;
+    transition: none;
+}
+
+/*the search bar*/
+nav input{
+    padding: 0.5em;
+    background-color: #d5a55a;
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+
+    margin-top: -10px; /*find another way to align this better*/
+    margin-left: 20px;
+}
+
+::placeholder{ 
+    color: white;
+}
+
+.nav__logout{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: auto;
+}
+
+.nav__logout a{
+    display: flex;
+}
+
+.nav__logout img{
+    display: block; /*zorgt ervoor dat de afbeeldingen consistent zijn in gedrag*/
+    width: 50px;
+    height: 50px;
+}
+
+/*Winkelmand pagina*/
+.cart-container{
+    display: flex;
+    flex-direction: column;
+    background-color: #8e3f3f;
+    padding: 20px;
+    color: white;
+    border-radius: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.cart-header{
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.cart-table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.cart-table th, .cart-table td{
+    border-bottom: 1px solid white;
+    padding: 10px;
+    text-align: left;
+}
+
+.cart-table th{
+    font-size: 18px;
+}
+
+.cart-table td img{
+    width: 60px;
+    height: auto;
+    object-fit: contain;
+    margin-right: 10px;
+}
+
+.cart-table td input[type="number"]{
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #8e3f3f;
+}
+
+.cart-actions{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.cart-actions button{
+    padding: 10px 20px;
+    background-color: #2a2454;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cart-actions button:hover{
+    background-color: aquamarine;
+    color: #2a2454;
+}
+
+.cart-empty{
+    text-align: center;
+    font-size: 18px;
+    color: white;
+}
+
+.cart-empty a{
+    text-decoration: none;
+    color: #2a2454;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.cart-empty a:hover{
+    color: aquamarine;
+}
+
+.checkoutBtn{
+    text-decoration: none;
+    background-color: #2a2454;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.checkoutBtn:hover{
+    background-color: aquamarine;
+    color: #2a2454;
+}
