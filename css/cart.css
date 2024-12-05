@@ -118,6 +118,22 @@ nav input{
     font-size: 18px;
 }
 
+.removeBtn{
+    text-decoration: none;
+    background-color: #2a2454;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.removeBtn:hover{
+    background-color: aquamarine;
+    color: #2a2454;
+}
+
 .cart-table td img{
     width: 60px;
     height: auto;
