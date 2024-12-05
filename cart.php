@@ -2,6 +2,8 @@
     //PDO Connection
     require_once __DIR__ . "/bootstrap.php";
     use App\OnlineBookshop\Db;
+    use App\OnlineBookshop\Client;
+    use App\OnlineBookshop\Product;
     
     if(!isset($_SESSION['cart']) || empty($_SESSION['cart'])){
         $cart_empty = true;
@@ -19,7 +21,7 @@
     $placeholders = implode(',', array_fill(0, count($product_ids), '?'));
 
     //Haal de productinformatie op uit de database
-    $statement = $conn->query("SELECT * FROM products WHERE id IN ($placeholders)");
+    $statement = $conn->prepare("SELECT * FROM products WHERE id IN ($placeholders)");
     $statement->execute($product_ids);
     $products = $statement->fetchAll(\PDO::FETCH_ASSOC);
 }
@@ -32,11 +34,16 @@
     <link rel="stylesheet" type="text/css" href="css/cart.css?<?php echo time(); ?>"/>
 </head>
 <body>
-    <h2>Winkelmand</h2>
+    <?php include_once("nav.inc.php"); ?>
 
+    <div class="cart-container">
     <?php if(!$cart_empty): ?>
+        <div class="cart-header">
+            <h2>Je winkelmand</h2>
+        </div>
+
         <form method="POST" action="update_cart.php">
-            <table>
+            <table class="cart-table">
                 <thead>
                     <tr>
                         <th>Product</th>
@@ -66,12 +73,16 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <div class="cart-actions">
             <button type="submit" name="update_cart">Winkelmand bijwerken</button>
+            <a href="checkout.php" class="checkoutBtn">Naar afrekenen</a>
+            </div>
         </form>
-        <a href="checkout.php">Naar afrekenen</a>
 
     <?php else: ?>
-        <p>Uw winkelmand is leeg</p>
+        <div class="cart-empty">
+            <p>Uw winkelmand is leeg. <a href="index.php">Ga terug naar de winkel</a></p>
+        </div>
     <?php endif; ?>
 </body>
 </html>
