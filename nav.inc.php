@@ -23,10 +23,23 @@
             <a href="login.php"><img src="img/profileIcon.png"></a>
         <?php endif; ?>
 
-        <!--Als de gebruiker een admin, word het winkelwagen icoon niet getoont-->
+        <!--Winkelmand icoon voor de klanten-->
         <?php if (isset($_SESSION['loggedin']) && $_SESSION['usertype'] === 0): ?> 
-            <a href="#"> <img  class="hidden" src="img/shoppingIcon.png"></a>
+            <?php //Totaal aantal producten in het winkelmandje berekenen
+            $cart_count = isset($_SESSION['cart'])? array_sum($_SESSION['cart']) : 0; ?>
+            <a href="cart.php" class="navCartLink">
+                <img src="img/shoppingIcon.png">
+                <?php if($cart_count > 0): ?>
+                    <span class="cart-count"><?php echo $cart_count
+                    ?></span>
+                <?php endif; ?>
+            </a>
         <?php endif; ?>
+
+     <!--Als de gebruiker een admin, word het winkelwagen icoon niet getoont-->
+    <?php if(isset($_SESSION['loggedin']) && $_SESSION['usertype'] === 1): ?>
+        <a href="#" class="hidden"><img src="img/shoppingIcon.png" alt=""></a>
+    <?php endif; ?>
     </div>
 </nav>
 

@@ -11,6 +11,10 @@
 
     //Productgegevens ophalen uit de database
     $conn = Db::getConnection();
+
+
+    if(!$cart_empty){
+    //Maak placeholders aan voor de query
     $product_ids = array_keys($_SESSION['cart']);
     $placeholders = implode(',', array_fill(0, count($product_ids), '?'));
 
@@ -18,7 +22,7 @@
     $statement = $conn->query("SELECT * FROM products WHERE id IN ($placeholders)");
     $statement->execute($product_ids);
     $products = $statement->fetchAll(\PDO::FETCH_ASSOC);
-
+}
 ?><!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +34,7 @@
 <body>
     <h2>Winkelmand</h2>
 
-    <?php if(!empty($_SESSION['cart'])): ?>
+    <?php if(!$cart_empty): ?>
         <form method="POST" action="update_cart.php">
             <table>
                 <thead>
