@@ -28,7 +28,7 @@
     public static function getOrderDetails($orderId){
         try{
             $conn = Db::getConnection();
-            $query = "SELECT products.product_name, products.product_price, order_items.quantity FROM order_items INNER JOIN products ON order_items.product_id = products.id WHERE order_items.order_id = :order_id";
+            $query = "SELECT products.id AS product_id, products.product_name, products.product_price, order_items.quantity FROM order_items INNER JOIN products ON order_items.product_id = products.id WHERE order_items.order_id = :order_id";
 
             $statement = $conn->prepare($query);
             $statement->execute([':order_id' => $orderId]);
@@ -36,6 +36,55 @@
 
         } catch (Exception $e){
             error_log("Fout bij het ophalen van besteldetails: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public static function createOrder($clientId, $cart){
+        try{
+            $conn = Db::getConnection();
+
+            //Start een transactie
+            $conn->beginTransaction();
+
+            $orderStatement = $conn->prepare("INSERT INTO orders (client_id, order_date) VALUES (:client_id, NOW())");
+            $orderStatement->execute([':client_id' => $clientId]);
+
+            //Haal het ID van de toegevoegde bestelling op
+            $orderId = $conn->lastInsertId();
+
+            //Voeg producten toe aan de orders_items tabel
+            foreach($cart as $productId => $quantity){
+                $priceStatement = $conn->prepare("SELECT product_price FROM products WHERE id = :product_id");
+                $priceStatement->execute([':product_id' => $productId]);
+                $product = $priceStatement->fetch(\PDO::FETCH_ASSOC);
+
+                if (!$product) {
+                    error_log("Geen product gevonden voor ID: $productId");
+                    throw new Exception("Product met ID $productId bestaat niet.");
+                }
+
+                if($product){
+                    $productPrice = $product['product_price'];
+
+                    //Voeg het product toe aan de order_items tabel
+                    $orderItemStatement = $conn->prepare("INSERT INTO order_items (order_id, product_id, quantity, price) VALUES (:order_id, :product_id, :quantity, :price)");
+                    $orderItemStatement->execute([
+                        ':order_id' => $orderId, 
+                        ':product_id' => $productId, 
+                        ':quantity' => $quantity, 
+                        ':price' => $productPrice
+                    ]);
+                }
+            }
+
+            //Bevestig de transactie
+            $conn->commit();
+            return $orderId;
+        } catch (Exception $e){
+            //Maak de transactie ongedaan
+            $conn->rollBack();
+            error_log("Fout bij het aanmaken van de bestelling: " . $e->getMessage());
             return false;
         }
     }

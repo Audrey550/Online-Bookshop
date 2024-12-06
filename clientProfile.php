@@ -94,15 +94,15 @@
             <ul>
                 <?php foreach($orders as $order): ?>
                     <li>
-                        <h3>Order #<?php echo $order['id']; ?></h3>
+                        <h3>Order: <?php echo $order['id']; ?></h3>
                         <p><strong>Datum:</strong><?php echo $order['order_date']; ?></p>
-                        
+
                         <h4>Bestelde producten:</h4>
                         <?php $orderDetails = Order::getOrderDetails($order['id']); foreach($orderDetails as $item): ?>
                             <div>
-                                <p><strong>Product:</strong><?php echo htmlspecialchars($item['product_name']); ?></p>
-                                <p><strong>Prijs:</strong>€<?php echo number_format($item['product_price'], 2);?></p>
-                                <p><strong>Aantal:</strong><?php echo $item['quantity']; ?></p>
+                                <p><strong>Product:</strong> <?php echo htmlspecialchars($item['product_name']); ?></p>
+                                <p><strong>Prijs:</strong> €<?php echo number_format($item['product_price'], 2);?></p>
+                                <p><strong>Aantal:</strong> <?php echo $item['quantity']; ?></p>
 
                                 <!--Het reviewformulier-->
                                 <form method="POST" action="submitReview.php">
