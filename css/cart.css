@@ -202,3 +202,34 @@ nav input{
     background-color: aquamarine;
     color: #2a2454;
 }
+
+/*Checkout.php*/
+.checkout-container{
+    display: flex;
+    flex-direction: column;
+    background-color: #8e3f3f;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.button{
+    display: inline-block;
+    text-decoration: none;
+    background-color: #2a2454;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.button:hover{
+    background-color: aquamarine;
+    color: #2a2454;
+}
+
