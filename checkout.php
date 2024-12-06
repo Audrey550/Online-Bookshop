@@ -3,6 +3,7 @@
     use App\OnlineBookshop\Db;
     use App\OnlineBookshop\Client;
     use App\OnlineBookshop\Product;
+    use App\OnlineBookshop\Order;
 
     //Controleren of de gebruiker is ingelogd
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
@@ -49,13 +50,20 @@
             $statement = $conn->prepare("UPDATE clients SET credits = ? WHERE id = ?");
             $statement->execute([$new_credits, $client_id]);
 
-            //Maak de winkelmand leeg
-            unset($_SESSION['cart']);
+            //Slaag je bestelling op
+            $order_id = Order::createOrder($client_id, $_SESSION['cart']);
+
+            if($order_id){
+                //Maak de winkelmand leeg
+                unset($_SESSION['cart']);
 
             //Succesbericht tonen
             $payement_success = true;
+        }else{
+            $error_message = "Er is iets fout gegaan bij het afrekenen. Probeer het opnieuw.";
         }
     }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
