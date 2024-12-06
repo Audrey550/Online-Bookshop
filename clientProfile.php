@@ -94,8 +94,8 @@
             <ul>
                 <?php foreach($orders as $order): ?>
                     <li>
-                        <h3>Order: <?php echo $order['id']; ?></h3>
-                        <p><strong>Datum:</strong><?php echo $order['order_date']; ?></p>
+                        <h3>Bestelling nr: <?php echo $order['id']; ?></h3>
+                        <p><strong>Datum: </strong><?php echo $order['order_date']; ?></p>
 
                         <h4>Bestelde producten:</h4>
                         <?php $orderDetails = Order::getOrderDetails($order['id']); foreach($orderDetails as $item): ?>

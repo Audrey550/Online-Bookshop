@@ -95,7 +95,6 @@ nav input{
     border: 5px solid white;
     width: 80%;
     padding: 20px;
-    box-shadow: 0 4px 8px rgb(0, 0, 0, 0.1);
     border-radius: 20px;
     margin-bottom: 40px;
 }
@@ -134,4 +133,76 @@ nav input{
 .password-change-form .submit-Btn:hover{
     background-color: aquamarine;
     color: #2a2454;
+}
+
+/*Bekijk jouw bestellingen - ClienProfile.php*/
+.orders{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.orders h2{
+    margin-left: 20px;
+
+}
+
+.orders ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.orders li{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    background-color: #8e3f3f;
+    border: 3px solid white;
+    border-radius: 8px;
+    padding: 20px;
+    width: 33.333%;
+    box-sizing: border-box;
+}
+
+.orders li h3{
+    font-size: 1.5em;
+    color: #f0ba64;
+    margin-bottom: 10px;
+}
+
+.orders li p{
+    margin: 5px 0;
+    color: white;
+}
+
+.orders li strong{
+    color: #f1c6a1;
+}
+
+.orders li h4{
+    margin-top: 40px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #f0ba64;
+    margin-bottom: 10px;
+}
+
+.orders div {
+    margin-bottom: 15px;
+}
+
+
+
+
+
+
+
+@media (max-width: 768px){
+    .orders li{
+        width: 95%;
+    }
 }
