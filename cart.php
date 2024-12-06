@@ -5,6 +5,7 @@
     use App\OnlineBookshop\Client;
     use App\OnlineBookshop\Product;
     
+
     //Verwijder actie voor het verwijderen van een product uit de winkelmand
     if(($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['remove_product_id']))){
         $product_id_to_remove = $_GET['remove_product_id'];

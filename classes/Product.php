@@ -14,5 +14,17 @@
           $conn = Db::getConnection();
           $statement = $conn->query("SELECT * products");
           return $statement->fetchAll(\PDO::FETCH_ASSOC);
-      }      
+      }
+      
+    //Het totaalbedrag berkenen
+    public static function getTotalPrice($cart, $products){
+        $total_price = 0;
+      foreach($products as $product){
+        if(isset($cart[$product['id']])){
+          $quantity = $cart[$product['id']];
+          $total_price += $product['product_price'] * $quantity;
+        }
+      }
+        return $total_price;
+    }
 }
