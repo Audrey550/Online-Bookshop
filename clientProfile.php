@@ -2,6 +2,7 @@
     require_once __DIR__ . "/bootstrap.php";
     use App\OnlineBookshop\Db;
     use App\OnlineBookshop\Client;
+    use App\OnlineBookshop\Order;
 
    //var_dump($_SESSION);
     //exit;
@@ -26,6 +27,9 @@
         echo "Er is een probleem met het ophalen van je gegevens. Probeer opnieuw in te loggen aub.";
         exit;
     }
+
+    //Haal de bestellingen op voor de klant
+    $orders = Order::getOrderByClientId($client->getId());
 
     //Werwerken van wachtwoord wijzigen
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])){
@@ -82,6 +86,48 @@
 
             <button type="submit" name="change_password" class="submit-Btn">Verander je wachtwoord</button>
         </form>
+    </div>
+
+    <div class="orders">
+        <h2>Mijn Bestellingen</h2>
+        <?php if($orders && count($orders) > 0): ?>
+            <ul>
+                <?php foreach($orders as $order): ?>
+                    <li>
+                        <h3>Order #<?php echo $order['id']; ?></h3>
+                        <p><strong>Datum:</strong><?php echo $order['order_date']; ?></p>
+                        
+                        <h4>Bestelde producten:</h4>
+                        <?php $orderDetails = Order::getOrderDetails($order['id']); foreach($orderDetails as $item): ?>
+                            <div>
+                                <p><strong>Product:</strong><?php echo htmlspecialchars($item['product_name']); ?></p>
+                                <p><strong>Prijs:</strong>€<?php echo number_format($item['product_price'], 2);?></p>
+                                <p><strong>Aantal:</strong><?php echo $item['quantity']; ?></p>
+
+                                <!--Het reviewformulier-->
+                                <form method="POST" action="submitReview.php">
+                                    <input type="hidden" name="product_id" value="<?php echo $item['product_id']; ?>">
+                                    <label for="rating">Beoordeel dit product:</label>
+                                    <select name="rating" required>
+                                        <option value="1">1 - Slecht</option>
+                                        <option value="2">2 - Matig</option>
+                                        <option value="3">3 - Goed</option>
+                                        <option value="4">4 - Zeer goed</option>
+                                        <option value="5">5 - Uitstekend</option>
+                                    </select>
+
+                                    <label for="comment">Laat een review achter:</label>
+                                    <textarea name="comment" required></textarea>
+                                    <button type="submit" name="submit_review">Plaats je review</button>
+                                </form>
+                            </div>
+                        <?php endforeach; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <p>Je hebt nog geen bestellingen geplaatst</p>
+        <?php endif; ?>
     </div>
 
 </body>
