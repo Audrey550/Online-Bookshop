@@ -184,7 +184,7 @@ nav input{
 }
 
 .orders li h4{
-    margin-top: 40px;
+    margin-top: 25px;
     font-size: 1.5em;
     font-weight: bold;
     color: #f0ba64;
@@ -195,11 +195,43 @@ nav input{
     margin-bottom: 15px;
 }
 
+.review-form{
+    margin-top: 40px;
+    background-color: #f0ba64;
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
+.review-form label{
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #292b35;
+}
 
+.review-form select, .review-form textarea{
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
+.review-form button{
+    background-color: #2a2454;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 16px;
+    cursor: pointer;
+}
 
-
+.review-form button:hover{
+    background-color: aquamarine;
+    color: #2a2454;
+}
 
 @media (max-width: 768px){
     .orders li{

@@ -105,7 +105,7 @@
                                 <p><strong>Aantal:</strong> <?php echo $item['quantity']; ?></p>
 
                                 <!--Het reviewformulier-->
-                                <form method="POST" action="submitReview.php">
+                                <form class="review-form" method="POST" action="submitReview.php">
                                     <input type="hidden" name="product_id" value="<?php echo $item['product_id']; ?>">
                                     <label for="rating">Beoordeel dit product:</label>
                                     <select name="rating" required>
