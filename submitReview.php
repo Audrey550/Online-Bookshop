@@ -6,8 +6,11 @@
     use App\OnlineBookshop\Order;
     use App\OnlineBookshop\Review;
 
+    header('Content-Type: application/json'); // Zorg dat JSON expliciet is
+    error_reporting(E_ALL); // Zet foutmeldingen aan
+    ini_set('display_errors', 1); // Zorg dat foutmeldingen worden getoond
+
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        session_start();
         if(!isset($_SESSION['id'])){
             echo json_encode([
                 'status' => 'error',
@@ -17,16 +20,38 @@
         }
 
         $clientId = $_SESSION['id'];
-        $productId = $_POST['product_id'];
-        $rating = $_POST['rating'];
-        $comment = $_POST['comment'];
+        $productId = $_POST['product_id'] ?? null;
+        $rating = $_POST['rating'] ?? null;
+        $comment = $_POST['comment'] ?? null;
 
-        // Debug: Log de ontvangen gegevens
-        error_log("Ontvangen gegevens - Client ID: " . $clientId . ", Product ID: " . $productId . ", Rating: " . $rating . ", Comment: " . $comment);
+        if(!$productId || !$rating || !$comment){
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Niet alle verplichte velden zijn ingevuld'
+            ]);
+            exit;
+        }
 
+        //Probeer een review toe te voegen
         $result = Review::addReview($clientId, $productId, $rating, $comment);
-        header('Content-Type: application/json');
-        echo json_encode($result);
+
+        //Controleert of de review-functie een geldig resultaat retourneert
+        if($result === false){
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Er is iets fout gegaan bij het toevoegen van je review'
+            ]);
+            exit;
+        }
+
+        //Succesvolle JSON output
+        echo json_encode([
+            'status' => 'success',
+            'review' => [
+            'rating' => $rating,
+            'comment' => htmlspecialchars($comment)
+            ]
+        ]);
         exit;
     }
 

@@ -26,5 +26,6 @@
         }
       }
         return $total_price;
+
     }
 }

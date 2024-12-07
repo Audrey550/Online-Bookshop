@@ -6,7 +6,7 @@
     public static function addReview($clientId, $productId, $rating, $comment){
         try{
             $conn = Db::getConnection();
-            $query = "INSTERT INTO reviews (client_id, product_id, rating, comment) VALUES (:client_id, :product_id, :rating, :comment)";
+            $query = "INSERT INTO reviews (client_id, product_id, rating, comment) VALUES (:client_id, :product_id, :rating, :comment)";
             $statement = $conn->prepare($query);
             $statement->execute([
                 ':client_id' => $clientId, 

@@ -36,6 +36,7 @@
         $products = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
         $total_price = Product::getTotalPrice($_SESSION['cart'], $products);
+        //var_dump($total_price);
 
         //Variabelen voor het tonen van de bevestiging
         $payement_success = false;
