@@ -8,7 +8,7 @@ document.querySelectorAll(".review-form").forEach((form) => {
         
         formData.append("product_id", productId);
 
-        //Verzend de review naar de server
+        //Verzend de review naar de server via AJAX
         fetch("submitReview.php", {
             method: "POST",
             body: formData,
