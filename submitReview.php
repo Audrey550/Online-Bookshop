@@ -14,7 +14,7 @@
         if(!isset($_SESSION['id'])){
             echo json_encode([
                 'status' => 'error',
-                'message' => 'Je moet ingelogd zijn om een review te kunnen plaatsen'
+                'message' => 'Je moet ingelogd zijn om een review te kunnen plaatsen',
             ]);
             exit;
         }
@@ -24,10 +24,11 @@
         $rating = $_POST['rating'] ?? null;
         $comment = $_POST['comment'] ?? null;
 
+        //Controleert of onbrekende gegevens
         if(!$productId || !$rating || !$comment){
             echo json_encode([
                 'status' => 'error',
-                'message' => 'Niet alle verplichte velden zijn ingevuld'
+                'message' => 'Niet alle verplichte velden zijn ingevuld',
             ]);
             exit;
         }
@@ -35,23 +36,43 @@
         //Probeer een review toe te voegen
         $result = Review::addReview($clientId, $productId, $rating, $comment);
 
-        //Controleert of de review-functie een geldig resultaat retourneert
-        if($result === false){
+        if ($result['status'] !== 'success') {
+            // Fout bij toevoegen van de review
             echo json_encode([
                 'status' => 'error',
-                'message' => 'Er is iets fout gegaan bij het toevoegen van je review'
+                'message' => 'Er is iets fout gegaan bij het toevoegen van je review',
             ]);
             exit;
         }
+    
+        // Haal alle reviews op na het toevoegen
+        $reviews = Review::getReviewsByProductId($productId);
 
-        //Succesvolle JSON output
+        $reviewList = [];
+            foreach ($reviews as $review) {
+                $reviewList[] = [
+                    'rating' => $review['rating'],
+                    'comment' => htmlspecialchars($review['comment']),
+                    'created_at' => $review['created_at']
+                ];
+            }
+    
+        // Stuur de succesvolle JSON-output terug
         echo json_encode([
             'status' => 'success',
             'review' => [
-            'rating' => $rating,
-            'comment' => htmlspecialchars($comment)
-            ]
+                'rating' => $rating,
+                'comment' => htmlspecialchars($comment)
+            ],
+            'reviews' => $reviewList,
         ]);
         exit;
     }
-
+    
+    // Foutmelding als het geen POST-request is
+    echo json_encode([
+        'status' => 'error',
+        'message' => 'Ongeldig verzoek',
+    ]);
+    exit;
+?>

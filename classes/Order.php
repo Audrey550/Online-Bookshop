@@ -88,4 +88,18 @@
             return false;
         }
     }
+
+    public static function getReviewsByProductId($productId){
+        try{
+            $conn = Db::getConnection();
+            $query = "SELECT r.rating, r.comment, r.created_at FROM reviews r INNER JOIN products p ON r.product_id = p.id WHERE p.id = :product_id";
+
+            $statement = $conn->prepare($query);
+            $statement->execute([':product_id' => $productId]);
+            return $statement->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (Exception $e){
+            error_log("Fout bij het ophalen van reviews: " . $e->getMessage());
+            return false;
+        }
+    }
 }

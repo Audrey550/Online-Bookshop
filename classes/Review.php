@@ -42,6 +42,8 @@
                 $statement->execute([':product_id' => $productId]);
                 return $statement->fetchAll(\PDO::FETCH_ASSOC);
             } catch (\PDOException $e){
+                error_log("Fout bij het ophalen van reviews: " . $e->getMessage());
+
                 return [];
         }
     }

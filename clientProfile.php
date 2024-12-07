@@ -99,7 +99,7 @@
                         <p><strong>Datum: </strong><?php echo $order['order_date']; ?></p>
 
                         <h4>Bestelde producten:</h4>
-                        <?php $orderDetails = Order::getOrderDetails($order['id']); foreach($orderDetails as $item): ?>
+                        <?php $orderDetails = Order::getOrderDetails($order['id']); foreach($orderDetails as $item): $reviews = Order::getReviewsByProductId($item['product_id']); ?>
                             <div>
                                 <p><strong>Product:</strong> <?php echo htmlspecialchars($item['product_name']); ?></p>
                                 <p><strong>Prijs:</strong> €<?php echo number_format($item['product_price'], 2);?></p>
