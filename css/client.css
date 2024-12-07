@@ -195,7 +195,7 @@ nav input{
     margin-bottom: 15px;
 }
 
-.review-form{
+.orders .review-form{
     margin-top: 40px;
     background-color: #f0ba64;
     padding: 15px;
@@ -234,6 +234,13 @@ nav input{
     color: #2a2454;
 }
 
+.review-list li{
+    margin: 20px 0 auto;
+    background-color: red;
+    width: 100%;
+    border-radius: 5px;
+    gap: 5px;
+}
 @media (max-width: 768px){
     .orders li{
         width: 95%;
