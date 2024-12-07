@@ -4,6 +4,7 @@
     use App\OnlineBookshop\Client;
     use App\OnlineBookshop\Product;
     use App\OnlineBookshop\Order;
+    use App\OnlineBookshop\Review;
 
     //Controleren of de gebruiker is ingelogd
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){

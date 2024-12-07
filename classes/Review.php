@@ -3,18 +3,35 @@
    use App\OnlineBookshop\Db;
 
    class Review{
-        public static function addReview($clientId, $productId, $rating, $comment){
-            try{
-                $conn = Db::getConnection();
-                $query = "INSERT INTO reviews (client_id, product_id, rating, comment) VALUES (:client_id, :product_id, :rating, :comment)";
+    public static function addReview($clientId, $productId, $rating, $comment){
+        try{
+            $conn = Db::getConnection();
+            $query = "INSTERT INTO reviews (client_id, product_id, rating, comment) VALUES (:client_id, :product_id, :rating, :comment)";
+            $statement = $conn->prepare($query);
+            $statement->execute([
+                ':client_id' => $clientId, 
+                ':product_id' => $productId, 
+                ':rating' => $rating, 
+                ':comment' => $comment
+            ]);
 
-                $statement = $conn->prepare($query);
-                $statement->execute([':client_id' => $clientId, ':product_id' => $productId, ':rating' => $rating, ':comment' => $comment]);
-                return true;
-            } catch (\PDOException $e){
-                return false;
-            }
+            return[
+                'status' => 'success',
+                'message' => 'Bedankt voor je review',
+                'review' => [
+                    'client_id' => $clientId,
+                    'product_id' => $productId,
+                    'rating' => $rating,
+                    'comment' => htmlentities($comment)
+                ]
+            ];
+        } catch (\PDOException $e){
+            return [
+                'status' => 'error',
+                'message' => 'Er is iets fout gegaan bij het toevoegen van je review'
+            ];
         }
+    }
 
         public static function getReviewsByProductId($productId){
             try{

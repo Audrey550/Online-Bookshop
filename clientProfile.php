@@ -3,6 +3,7 @@
     use App\OnlineBookshop\Db;
     use App\OnlineBookshop\Client;
     use App\OnlineBookshop\Order;
+    use App\OnlineBookshop\Review;
 
    //var_dump($_SESSION);
     //exit;
@@ -105,8 +106,7 @@
                                 <p><strong>Aantal:</strong> <?php echo $item['quantity']; ?></p>
 
                                 <!--Het reviewformulier-->
-                                <form class="review-form" method="POST" action="submitReview.php">
-                                    <input type="hidden" name="product_id" value="<?php echo $item['product_id']; ?>">
+                                <form class="review-form" id="reviewForm-<?php echo $item['product_id']; ?>" data-product-id="<?php echo $item['product_id']; ?>">
                                     <label for="rating">Beoordeel dit product:</label>
                                     <select name="rating" required>
                                         <option value="1">1 - Slecht</option>
@@ -120,6 +120,10 @@
                                     <textarea name="comment" required></textarea>
                                     <button type="submit" name="submit_review">Plaats je review</button>
                                 </form>
+
+                                <ul class="review-list" id="reviewList-<?php echo $item['product_id']; ?>">
+                                    <!--Hier komen de nieuwe reviews-->
+                                </ul>
                             </div>
                         <?php endforeach; ?>
                     </li>
@@ -130,5 +134,7 @@
         <?php endif; ?>
     </div>
 
+    <script src="app.js"></script>
+    
 </body>
 </html>
