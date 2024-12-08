@@ -51,6 +51,15 @@
         <!--Zorgt dat de cijfers decimaal zijn-->
         <a href="index.php" class="returnToHome">Ga terug naar de homepage</a>
 
+        <?php if($_SESSION['usertype'] == 0): ?>
+        <form method="POST" action="browse.php">
+            <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
+            <label for="quantity-<?php echo $product['id']; ?>">Aantal:</label>
+            <input type="number" id="quantity-<?php echo $product['id']; ?>" name="quantity" value="1">
+            <button type="submit" name="add_to_cart" class="add_to_cartBtn">Voeg toe aan het winkelmandje</button>
+        </form>
+        <?php endif ?>
+
         <?php if($_SESSION['usertype'] == 1): ?>
         <form method="GET" action="adminEditProduct.php">
             <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">

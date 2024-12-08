@@ -6,13 +6,13 @@
 
    //Check if user is logged in
     if($_SESSION['loggedin']!== true){
-        header('Location: signup.php'); //login.php verandert naar signup.php
+        header('Location: signup.php');
     }
 
     //Aantal woorden dat ik wil tonen in de productbeschrijving
     $word_limit = 35;
 
-    //Verkort de tekstfunctie
+    //Verkort de productbeschrijving tekst op de home en browse pagina
     function truncate_text($text, $limit){
         $words = explode(' ', $text);
         if(count($words) > $limit){
@@ -27,7 +27,7 @@
     $statement = $conn->query("SELECT * FROM genres");
     $genres = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
-    //SELECT * from products and fetch as array:
+    //SELECT * from products and fetch als array:
     $statement->execute();
     $products = $statement->fetchAll(\PDO::FETCH_ASSOC);
 
@@ -54,7 +54,8 @@
         <img src="img/categories.png">
     </div>
 
-    <div class="topPicks"> <!--A mockup of the top 3 listing of the most bought items that week-->
+    <!--A mockup of the top 3 boeken die het meest verkocht zijn. Dit is enkel voor decoratie, je kan er niet op klikken-->
+    <div class="topPicks">
         <h2>Onze bestsellers van deze week:</h2>
             <div class="topOne">
                 <h1>1</h1>
@@ -69,22 +70,9 @@
             </div>
     </div>
 
-    <!--Dropdown menu om de producten per genre te kunnen filteren. Delete from index later!!--> 
-    <h2 class="recent-products-title">Nieuwe boeken, net binnen!</h2>
-    <form method="POST" action="">
-        <label for="genre" class="genre-title">Filter op genre:</label>
-        <select name="genre" id="genre" class="genre-select">
-            <option value="">Alle genres</option>
-            <?php foreach($genres as $genre):?>
-            <option value="<?php echo $genre['id']; ?>">
-                <?php echo htmlspecialchars($genre['genre_name']); ?>
-            </option>
-            <?php endforeach; ?>
-        </select>
-        <button type="submit" class="search-Btn">Zoek</button>
-    </form>
-
     <!--De recente producten op de pagina displayen-->
+    <h2 class="recent-products-title">Nieuwe boeken, net binnen!</h2>
+
     <div class="recent-products-container">
         <?php foreach($recentProducts as $product): ?>
         <article class="recent-product">
@@ -103,13 +91,14 @@
             </h4>
             <h3>€<?php echo $product['product_price'];?></h3>
 
+        <!--Producten kunnen bewerken (enkel als admin)-->
         <?php if($_SESSION['usertype'] == 1): ?>
         <form method="GET" action="adminEditProduct.php">
             <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
             <button type="submit" class="edit-Btn">Bewerk het product</button>
         </form>
 
-        <!--Producten kunnen verwijderen (als admin!)-->
+        <!--Producten kunnen verwijderen (enkel als admin!)-->
         <form method="POST" action="adminDeleteProduct.php">
             <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
             <button type="submit" class="delete-Btn">Verwijder dit product</button>

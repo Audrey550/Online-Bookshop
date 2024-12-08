@@ -1,8 +1,6 @@
 <nav>
     <a href="index.php">Home</a>
-    <a href="#">About</a>
     <a href="browse.php">Browse</a>
-    <a href="#">Contact</a>
 
     <form action="search.php" method="get">
         <input type="text" name="search" placeholder="Zoek op titel of auteur..." value="<?php echo htmlspecialchars($_GET['search']?? ''); ?>">
@@ -11,8 +9,8 @@
     <div class="nav__logout">
             <!--Controleert of de gebruiker is ingelogd-->
         <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true): ?>
-            <!--Logout knop--> 
 
+            <!--Logout knop--> 
             <a href="logout.php" class="logout">Hallo <?php echo htmlspecialchars($_SESSION['username']); ?>, logout?</a>
 
             <!--Profiellink afhangend van wat soort gebruiker het is-->

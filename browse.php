@@ -102,11 +102,10 @@
         <h2 class="product-name">
         <a href="productDetails.php?id=<?php echo $product['id']; ?>">
             <?php echo $product['product_name']; ?>
+            <img src="<?php echo"./".htmlspecialchars($product['product_img']);?>" class="product-img">
         </a> 
         </h2>
 
-        <!--<a href="productDetails.php">De img code van lijn 78</a>-->
-        <img src="<?php echo"./".htmlspecialchars($product['product_img']);?>" class="product-img">
         
         <!--Beperkt de beschrijving tot een bepaald aantal woorden-->
         <h4 class="product-description"><?php echo (htmlspecialchars(truncate_text($product['product_description'], $word_limit))); ?>
@@ -119,12 +118,14 @@
         <h3>€<?php echo $product['product_price'];?></h3>
 
         <!--Producten kunnen toevoegen aan winkelmandje-->
+        <?php if($_SESSION['usertype'] == 0): ?>
         <form method="POST" action="browse.php">
             <input type="hidden" name="product_id" value="<?php echo $product['id']; ?>">
             <label for="quantity-<?php echo $product['id']; ?>">Aantal:</label>
             <input type="number" id="quantity-<?php echo $product['id']; ?>" name="quantity" value="1">
             <button type="submit" name="add_to_cart" class="add_to_cartBtn">Voeg toe aan het winkelmandje</button>
         </form>
+        <?php endif ?>
 
         <!--Producten kunnen bewerken (als admin)-->
         <?php if($_SESSION['usertype'] == 1): ?>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 04 dec 2024 om 12:23
+-- Gegenereerd op: 08 dec 2024 om 12:45
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.2.12
 
@@ -90,10 +90,10 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`id`, `username`, `email`, `password`, `usertype`, `credits`) VALUES
-(1, '', 'hey@email.com', '$2y$15$n.8TR3.TcC0G96MLPxlxU.koK7YXZkKFhZq42uvr7PlhPsU/5UdjW', 0, 1000),
-(13, '', 'Blossom@email.com', '$2y$15$qjmeGt8rpYhpyvjTDyjN2egGEEgZHJk9sIfVw2DmHqCNlCo.btAlG', 0, 1000),
 (89, 'Audrey', 'admin@email.com', '$2y$10$DPjOaSIAW3gICFwfPBL0COawJpdcKa0/LBYXBaSDkrlp71/tb4gH2', 1, 0),
-(92, 'Lily', 'lily@email.com', '$2y$10$wSg/RhaA/S5QB6Lwku5EvuhZEu/XhSKN.jDjZBJNQAZpnkBI4K7fW', 0, 1000);
+(97, 'Lily', 'lily@email.com', '$2y$10$n20.pJwaYdCMIpGuJItf1.8DkAwPDFrh2SwKDSFJ9.V/X1Jxs7L2W', 0, 866.07),
+(98, 'Joris', 'admin@admin.com ', '$2y$10$rXLaUnnBc.37q74pY6pUju06o5Sck1kEsw.tViQ.gfkPy0Xu2uGFq', 1, 0),
+(101, 'User', 'user@user.com', '$2y$10$mIZnlOVijA8gXTD2vPhI.u4WOuFXSPkElvVwb0/xicEnj.r0Zo2vS', 0, 975);
 
 -- --------------------------------------------------------
 
@@ -121,6 +121,50 @@ INSERT INTO `genres` (`id`, `genre_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tabelstructuur voor tabel `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `order_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `orders`
+--
+
+INSERT INTO `orders` (`id`, `client_id`, `order_date`) VALUES
+(21, 97, '2024-12-07 23:10:40'),
+(22, 97, '2024-12-07 23:11:32'),
+(25, 101, '2024-12-08 11:35:54');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` decimal(11,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `quantity`, `price`) VALUES
+(23, 21, 2, 1, 15.99),
+(24, 22, 2, 1, 15.99),
+(27, 25, 62, 2, 12.50);
+
+-- --------------------------------------------------------
+
+--
 -- Tabelstructuur voor tabel `products`
 --
 
@@ -140,7 +184,7 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `product_name`, `product_description`, `genre_id`, `product_price`, `product_img`, `author_id`) VALUES
 (1, 'Shadow and Bone', 'Alina Starkov is nooit ergens goed in geweest. Maar als haar regiment wordt aangevallen en haar beste vriend Mal zwaargewond raakt, ontwaakt er bij Alina een onbekende kracht die zijn leven redt. Een kracht die het door oorlog getergde koninkrijk voor eens en altijd kan bevrijden. Alina moet alles achterlaten om haar training te starten onder het wakende oog van De Duisterling. Maar is haar gave het enige waar hij oog voor heeft? ', 2, 10.99, 'img/shadowandbone.jpg', 1),
-(2, 'Get a Life, Chloe Brown', 'Chloë is niet de average hoofdpersonage in een romance: ze is chronisch ziek, een computernerd en ze was bijna dood. Die gebeurtenis zet haar aan tot het opstellen van een lijst vol buitenissigheden, zoals dronken worden, motorrijden én iets slechts doen. Enter Redford Morgan, een hele aantrekkelijke klusjesman met tattoos en een motor. De perfecte persoon voor haar lijstje mee af te werken. hallo', 1, 15.99, 'img/getalifechloebrown.jpg', 2),
+(2, 'Get a Life, Chloe Brown', 'Chloë is niet de average hoofdpersonage in een romance: ze is chronisch ziek, een computernerd en ze was bijna dood. Die gebeurtenis zet haar aan tot het opstellen van een lijst vol buitenissigheden, zoals dronken worden, motorrijden én iets slechts doen. Enter Redford Morgan, een hele aantrekkelijke klusjesman met tattoos en een motor. De perfecte persoon voor haar lijstje mee af te werken. ', 1, 15.99, 'img/getalifechloebrown.jpg', 2),
 (3, 'Tiny en De Verassing ', 'Tiny’s nichtje Ellie komt op bezoek. De meisjes hebben elkaar lange tijd niet meer gezien. Tiny heeft een mooie verrassing voor Ellie!\r\n\r\nDe avonturen van Tiny gaan al heel veel jaren mee en blijven nog altijd een plezier om te lezen.\r\n', 3, 5.99, 'img/tinyendeverassing.jpg', 3),
 (5, 'Divergent 1', 'Futuristisch Chicago. De wereld van de zestienjarige Tris is opgedeeld in vijf facties: Oprechtheid, Zelfverloochening, Onverschrokkenheid, Vriendschap en Eruditie. Ieder jaar moeten alle zestienjarigen kiezen bij welke factie zij de rest van hun leven willen horen. Voor Beatrice betekent dit dat ze een keus moet maken tussen haar familie en haar ware identiteit. Haar beslissing verrast iedereen, vooral haarzelf.', 2, 25.50, 'img/divergent.jpg', 4),
 (6, 'Floor is smoor', 'Floor is smoorverliefd op een jongen, maar ze weet helemaal niet hoe hij heet. Haar beste vriendin Margreet heeft het ook zwaar te pakken, maar dan niet van een jongen, maar van een paard. En met Valentijnsdag gooien Floor en Margreet bij alle jongens uit de buurt een kaart in de bus. Ze zijn alleen maar één ding vergeten...', 3, 15.99, 'img/floorIsSmoor.jpg', 5),
@@ -178,7 +222,33 @@ INSERT INTO `products` (`id`, `product_name`, `product_description`, `genre_id`,
 (53, 'Maxime en Sophie - De grootste challenge ooit', 'Een spetterend boek over het leukste meidenduo van TikTok en YouTube! De ouders van Maxime zijn een weekendje weg. Nu kan zij met Sophie eindelijk een vette Waterslide Challenge in hun tuin opnemen. Beter nog: ze veranderen het hele huis in een zwemparadijs! Maar Maximes kleine broertje Gideon wil alles verraden aan Maximes moeder. Er is heel veel paprikachips nodig om hem tegen te houden. En er is heel weinig tijd om de challenge op te nemen én alles weer op te ruimen... Een hilarisch avontuur met glansrollen voor de beroemde typetjes van Maxime &amp;amp;amp;amp;amp; Sophie. Met veel striptek', 3, 15.99, 'img/maxensophie.jpg', 27),
 (54, 'De Grijze Jager 1 - De ruïnes van Gorlan', 'De ruïnes van Gorlan gaat over Will. Will is klein voor zijn leeftijd, maar razendsnel en niet dom. Zijn hele leven heeft hij ervan gedroomd om ridder te worden, net als zijn vader, die hij nooit heeft gekend. Hij is dan ook hevig teleurgesteld als hij afgewezen wordt voor de krijgsschool van kasteel Redmont. In plaats daarvan wordt hij toegewezen aan Halt, de mysterieuze Grijze Jager wiens grootste talent lijkt te zijn dat hij zich onopvallend door het rijk kan verplaatsen.', 2, 12.99, 'img/grijzejager.jpg', 28),
 (55, 'De Glazen Troon', 'Celaena wordt voor de keuze gesteld: óf haar leven slijten in de gevangenis, óf deelnemen aan een toernooi waarvan de winnaar de nieuwe kampioen van de koning wordt. Een voor een worden de deelnemers van het toernooi echter op gruwelijke wijze vermoord en al snel vecht Celaena niet alleen voor haar vrijheid, maar ook voor haar leven.', 2, 5.99, 'img/glazentroon.jpg', 29),
-(56, 'Onderzoeken van fraude', 'De schrijver heeft zich de accountancy, het ondernemings-, fiscaal- en strafrecht meester gemaakt. Hij publiceert op het gebied van strafrecht, integriteit en fraude. Dit boek biedt de lezer een handvat hoe fraude onderzocht kan worden. Hierbij wordt ingegaan op de opsporingsambtenaar, de particulier onderzoeker, de forensisch IT-auditor en de forensisch accountant. Daarnaast worden veertien modelonderzoeken beschreven hoe fraude onderzocht zou kunnen worden. Het boek biedt de onderzoeker van fraude ondersteuning, maar ook de opdrachtgever en degene die onderzocht wordt.', 4, 25.99, 'img/onderzoekfraude.jpg', 30);
+(56, 'Onderzoeken van fraude', 'De schrijver heeft zich de accountancy, het ondernemings-, fiscaal- en strafrecht meester gemaakt. Hij publiceert op het gebied van strafrecht, integriteit en fraude. Dit boek biedt de lezer een handvat hoe fraude onderzocht kan worden. Hierbij wordt ingegaan op de opsporingsambtenaar, de particulier onderzoeker, de forensisch IT-auditor en de forensisch accountant. Daarnaast worden veertien modelonderzoeken beschreven hoe fraude onderzocht zou kunnen worden. Het boek biedt de onderzoeker van fraude ondersteuning, maar ook de opdrachtgever en degene die onderzocht wordt.', 4, 25.99, 'img/onderzoekfraude.jpg', 30),
+(58, 'Take A Hint, Dani Brown', 'Danika Brown knows what she wants: professional success, academic renown and an occasional roll in the hay to relieve all that career-driven tension. But romance? Been there, done that, burned the T-shirt. So Dani asks the universe for the perfect friend-with-benefits. When brooding security guard Zafir Ansari rescues her from a workplace fire drill gone wrong, a video of the heroic rescue goes viral. Now half the internet is shipping #DrRugbae - and Zaf is begging her to play along. ', 1, 11.50, 'img/takeahintdanibeown.jpg', 2),
+(59, 'Act Your Age, Eve Brown', 'Eve Brown is a certified hot mess. No matter how hard she strives to do right, her life always goes horribly wrong - so she gave up trying. But when her personal brand of chaos ruins a wedding, her parents draw the line. It is time for Eve to grow up and prove herself - even though she is not entirely sure how. Jacob Wayne is always in control. The uptight hotel owner expects nothing less than perfection from his employees, so when a purple-haired tornado of a woman applies for his open chef position, he tells her the brutal truth: not a chance in hell. Then she hits him with her car.', 1, 10.99, 'img/actyourageevebrown.jpg', 2),
+(62, 'Demo Product', 'Lorem Ipsum is een standaard tekst die wordt gebruikt om de indeling van een grafisch design tijdelijk in te vullen. Deze tekst bestaat uit een onleesbaar tekstfragment waardoor de aandacht uitgaat naar het design van de pagina, niet de inhoud van de tekst.', 4, 12.50, 'img/greatdemo.jpg', 13);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `rating` int(11) NOT NULL,
+  `comment` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `reviews`
+--
+
+INSERT INTO `reviews` (`id`, `client_id`, `product_id`, `rating`, `comment`, `created_at`) VALUES
+(113, 97, 9, 5, 'Beste boek ever !!', '2024-12-07 22:14:55'),
+(116, 101, 62, 5, 'Wow, wat een geweldig product !!', '2024-12-08 11:36:19');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -203,10 +273,33 @@ ALTER TABLE `genres`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexen voor tabel `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `client_id` (`client_id`);
+
+--
+-- Indexen voor tabel `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
 -- Indexen voor tabel `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexen voor tabel `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `client_id` (`client_id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
@@ -222,7 +315,7 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT voor een tabel `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT voor een tabel `genres`
@@ -231,10 +324,52 @@ ALTER TABLE `genres`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT voor een tabel `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT voor een tabel `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
 -- AUTO_INCREMENT voor een tabel `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
+-- AUTO_INCREMENT voor een tabel `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+
+--
+-- Beperkingen voor geëxporteerde tabellen
+--
+
+--
+-- Beperkingen voor tabel `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`);
+
+--
+-- Beperkingen voor tabel `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`),
+  ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+--
+-- Beperkingen voor tabel `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
