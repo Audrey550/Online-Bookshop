@@ -2,4 +2,3 @@
 .Thumbs.db
 classes/Db.php
 /vendor/
-*.pem
