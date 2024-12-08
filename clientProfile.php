@@ -5,24 +5,13 @@
     use App\OnlineBookshop\Order;
     use App\OnlineBookshop\Review;
 
-   //var_dump($_SESSION);
-    //exit;
 
     if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true){
         header("Location: login.php");
         exit;
     }
-    //var_dump($_SESSION['email']);
 
     $client = Client::getByEmail($_SESSION['email']);
-    //var_dump($client);
-    //exit;
-
-    //$conn = Db::getConnection();
-    /*$statement = $conn->prepare("SELECT username, email FROM clients WHERE id = :id");
-    $statement->bindParam(':id', $_SESSION['id'], PDO::PARAM_INT);
-    $statement->execute();
-    $client = $statement->fetch(PDO::FETCH_ASSOC);*/
 
     if(!$client){
         echo "Er is een probleem met het ophalen van je gegevens. Probeer opnieuw in te loggen aub.";
