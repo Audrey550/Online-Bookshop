@@ -55,10 +55,17 @@
     </div>
 
     <div class="topPicks"> <!--A mockup of the top 3 listing of the most bought items that week-->
-        <h2>Onze bestsellers van deze week</h2>
+        <h2>Onze bestsellers van deze week:</h2>
             <div class="topOne">
                 <h1>1</h1>
-                <h3>Get A Life, Chloe Brown <br> Talia Hibbert</h3>
+            </div>
+
+            <div class="topTwo">
+                <h1>2</h1>
+            </div>
+
+            <div class="topThree">
+                <h1>3</h1>
             </div>
     </div>
 
