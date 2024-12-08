@@ -236,12 +236,12 @@ nav input{
 
 .review-list li{
     margin: 20px 0 auto;
-    background-color: #e4c595;
+    background-color: white;
     width: 100%;
+    border: 5px solid #f0ba64;
     border-radius: 5px;
     gap: 5px;
 }
-
 
 @media (max-width: 768px){
     .orders li{
